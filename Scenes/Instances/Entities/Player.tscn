@@ -1,0 +1,90 @@
+[gd_scene load_steps=11 format=3 uid="uid://bsofscoyhgn5v"]
+
+[ext_resource type="Script" path="res://Codes/Instances/Entities/Player.gd" id="1_ci8b2"]
+[ext_resource type="PackedScene" uid="uid://ct70ef08rhvwj" path="res://Scenes/Uniques/Systems/PlayerStateMachine.tscn" id="1_uf74p"]
+[ext_resource type="Script" path="res://addons/platformer_system/InputBox.gd" id="3_ye2lm"]
+[ext_resource type="Script" path="res://addons/fight_system/HurtBox.gd" id="5_ljaq7"]
+[ext_resource type="Script" path="res://addons/fight_system/HealthComponent.gd" id="6_ff5px"]
+[ext_resource type="PackedScene" uid="uid://b03swr470kxkj" path="res://Scenes/Uniques/Systems/PlayerAnimations.tscn" id="8_2v88b"]
+[ext_resource type="Shader" path="res://Ressources/Uniques/Shaders/ColorSwap.gdshader" id="8_lennq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n8tbi"]
+size = Vector2(24, 48)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0fke2"]
+size = Vector2(26, 50)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_75q78"]
+resource_local_to_scene = true
+shader = ExtResource("8_lennq")
+shader_parameter/replace_p_color = Color(0.321569, 0.227451, 0.368627, 1)
+shader_parameter/replace_s_color = Color(0.254902, 0.254902, 0.521569, 1)
+shader_parameter/replace_t_color = null
+
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("health_component")]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_ci8b2")
+stat_jump = 375
+stat_weight = 25
+health_component = NodePath("HealthComponent")
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+z_index = -1
+shape = SubResource("RectangleShape2D_n8tbi")
+
+[node name="StateMachine" parent="." node_paths=PackedStringArray("master") instance=ExtResource("1_uf74p")]
+master = NodePath("..")
+auto_ready = false
+
+[node name="InputBox" type="Node" parent="."]
+script = ExtResource("3_ye2lm")
+
+[node name="HurtBox" type="Area2D" parent="." node_paths=PackedStringArray("health_component")]
+z_index = -2
+script = ExtResource("5_ljaq7")
+health_component = NodePath("../HealthComponent")
+
+[node name="Collision" type="CollisionShape2D" parent="HurtBox"]
+shape = SubResource("RectangleShape2D_0fke2")
+
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("6_ff5px")
+health = 125
+
+[node name="Camera" type="Camera2D" parent="."]
+visible = false
+position_smoothing_speed = 100.0
+
+[node name="Label" type="Label" parent="."]
+offset_left = -96.0
+offset_top = -96.0
+offset_right = 95.0
+offset_bottom = -48.0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PlayerAnimations" parent="." instance=ExtResource("8_2v88b")]
+z_index = 1
+material = SubResource("ShaderMaterial_75q78")
+position = Vector2(0, 24)
+
+[node name="EdgeChecker" type="RayCast2D" parent="PlayerAnimations"]
+position = Vector2(14, -50)
+target_position = Vector2(0, 4)
+collision_mask = 2
+
+[node name="FloorChecker" type="RayCast2D" parent="PlayerAnimations"]
+position = Vector2(12, -51)
+target_position = Vector2(6, 0)
+collision_mask = 2
+
+[node name="GroundChecker" type="RayCast2D" parent="."]
+target_position = Vector2(0, 480)
+collision_mask = 2
+
+[connection signal="state_entered" from="StateMachine" to="." method="_on_state_machine_state_entered"]
+[connection signal="damage_blocked" from="HurtBox" to="." method="_on_hurt_box_damage_blocked"]
+[connection signal="damage_taken" from="HurtBox" to="." method="_on_hurt_box_damage_taken"]
+[connection signal="died" from="HurtBox" to="." method="_on_hurt_box_died"]
+[connection signal="revived" from="HurtBox" to="." method="_on_hurt_box_revived"]

@@ -1,0 +1,273 @@
+[gd_scene load_steps=19 format=3 uid="uid://cvpuef5avh2rm"]
+
+[ext_resource type="Script" path="res://addons/platformer_system/InputBox.gd" id="1_gypdt"]
+[ext_resource type="Script" path="res://Codes/Instances/Interfaces/PlayerSelection.gd" id="1_wxqec"]
+[ext_resource type="Material" uid="uid://cnwiycabm80ry" path="res://Ressources/Uniques/Shaders/ColorSwap.tres" id="3_d6xol"]
+[ext_resource type="LabelSettings" uid="uid://hfcxv7q3cbv7" path="res://Ressources/Uniques/Themes/OutlineText.tres" id="3_pahlw"]
+[ext_resource type="Texture2D" uid="uid://cqnlk57477pag" path="res://Textures/Instances/Interfaces/PlayerCard.png" id="3_s7s5e"]
+[ext_resource type="Shader" path="res://Ressources/Uniques/Shaders/Wave.gdshader" id="5_3hi5r"]
+[ext_resource type="Shader" path="res://Ressources/Uniques/Shaders/MovingShards.gdshader" id="6_dh62w"]
+
+[sub_resource type="Animation" id="Animation_8peem"]
+resource_name = "Input"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0.784314, 0.784314, 0.784314, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_brdcn"]
+resource_name = "Join"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.784314, 0.784314, 0.784314, 0), Color(0.784314, 0.784314, 0.784314, 0.996078)]
+}
+
+[sub_resource type="Animation" id="Animation_n012i"]
+resource_name = "Leave"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.784314, 0.784314, 0.784314, 1), Color(0.784314, 0.784314, 0.784314, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_gqd3u"]
+resource_name = "LeaveLocked"
+length = 0.2
+step = 0.025
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Card/Offset:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.025, 0.05, 0.075, 0.1, 0.125, 0.15, 0.175, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(1, 1), Vector2(-1, -1), Vector2(1, -1), Vector2(-1, 1), Vector2(0, 1), Vector2(1, 0), Vector2(-1, 0), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_x3172"]
+resource_name = "Lock"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.784314, 0.784314, 0.784314, 1), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Card/Offset/Background/Effect:material:shader_parameter/height")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 0.75]
+}
+
+[sub_resource type="Animation" id="Animation_1svb0"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Card/Offset/Background/Effect:material:shader_parameter/height")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Card/Offset:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_44844"]
+_data = {
+"Input": SubResource("Animation_8peem"),
+"Join": SubResource("Animation_brdcn"),
+"Leave": SubResource("Animation_n012i"),
+"LeaveLocked": SubResource("Animation_gqd3u"),
+"Lock": SubResource("Animation_x3172"),
+"RESET": SubResource("Animation_1svb0")
+}
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_vu5ko"]
+noise_type = 3
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_32aqj"]
+width = 188
+height = 448
+seamless = true
+noise = SubResource("FastNoiseLite_vu5ko")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mfsvt"]
+resource_local_to_scene = true
+shader = ExtResource("6_dh62w")
+shader_parameter/p_color = Color(1, 0, 0.0313726, 1)
+shader_parameter/s_color = Color(0.807843, 0.113725, 0.439216, 1)
+shader_parameter/height = 0.0
+shader_parameter/noise = SubResource("NoiseTexture2D_32aqj")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pl8kn"]
+resource_local_to_scene = true
+shader = ExtResource("5_3hi5r")
+shader_parameter/speed = 1.0
+shader_parameter/height = 5.0
+shader_parameter/waves = 5.0
+shader_parameter/foam_size = 1.2
+shader_parameter/foam = Color(0.807843, 0.113725, 0.439216, 1)
+
+[node name="PlayerSelection" type="Control"]
+texture_filter = 3
+custom_minimum_size = Vector2(97, 150)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 100.0
+offset_bottom = 135.0
+script = ExtResource("1_wxqec")
+
+[node name="InputBox" type="Node" parent="."]
+script = ExtResource("1_gypdt")
+
+[node name="SkinName" type="Label" parent="."]
+z_index = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -30.0
+text = "Blood"
+label_settings = ExtResource("3_pahlw")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Animation" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_44844")
+}
+
+[node name="Card" type="Node2D" parent="."]
+position = Vector2(50, 60)
+
+[node name="Offset" type="Node2D" parent="Card"]
+
+[node name="Panel" type="Sprite2D" parent="Card/Offset"]
+material = ExtResource("3_d6xol")
+texture = ExtResource("3_s7s5e")
+hframes = 3
+
+[node name="Border" type="Sprite2D" parent="Card/Offset"]
+z_index = 1
+position = Vector2(0, 30)
+texture = ExtResource("3_s7s5e")
+hframes = 3
+frame = 1
+
+[node name="Background" type="Sprite2D" parent="Card/Offset"]
+modulate = Color(1, 0, 0.0313726, 1)
+z_index = -1
+texture = ExtResource("3_s7s5e")
+hframes = 3
+frame = 2
+
+[node name="Effect" type="ColorRect" parent="Card/Offset/Background"]
+z_index = -1
+material = SubResource("ShaderMaterial_mfsvt")
+offset_left = -47.0
+offset_top = -51.0
+offset_right = 47.0
+offset_bottom = 61.0
+
+[node name="Wave" type="ColorRect" parent="Card"]
+material = SubResource("ShaderMaterial_pl8kn")
+offset_left = -47.0
+offset_top = 47.0
+offset_right = 47.0
+offset_bottom = 87.0
+color = Color(1, 0, 0.0313726, 1)
+
+[connection signal="action_just_pressed" from="InputBox" to="." method="_on_input_box_action_just_pressed"]

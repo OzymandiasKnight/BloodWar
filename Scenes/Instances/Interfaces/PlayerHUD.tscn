@@ -1,0 +1,107 @@
+[gd_scene load_steps=12 format=3 uid="uid://by8uloocmfjkk"]
+
+[ext_resource type="Texture2D" uid="uid://disqrrk4von47" path="res://Textures/Instances/Interfaces/PlayerHUD.png" id="1_h2hwo"]
+[ext_resource type="Script" path="res://Codes/Instances/Interfaces/PlayerHUD.gd" id="1_uxe18"]
+[ext_resource type="Texture2D" uid="uid://di6gqhy8vfas5" path="res://Textures/Instances/Interfaces/Slash.png" id="3_kx4tr"]
+[ext_resource type="Texture2D" uid="uid://cqnlk57477pag" path="res://Textures/Instances/Interfaces/PlayerCard.png" id="4_87enh"]
+[ext_resource type="LabelSettings" uid="uid://hfcxv7q3cbv7" path="res://Ressources/Uniques/Themes/OutlineText.tres" id="4_r3lpq"]
+[ext_resource type="Texture2D" uid="uid://dka6w7plyjux8" path="res://Textures/Instances/Interfaces/Borders.png" id="4_y1wtp"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xrg5j"]
+atlas = ExtResource("1_h2hwo")
+region = Rect2(0, 0, 400, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fef4a"]
+atlas = ExtResource("1_h2hwo")
+region = Rect2(0, 20, 400, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i20c2"]
+atlas = ExtResource("4_87enh")
+region = Rect2(0, 0, 100, 120)
+
+[sub_resource type="Animation" id="Animation_i26do"]
+resource_name = "Announcement"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Announcement:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lp8d8"]
+_data = {
+"Announcement": SubResource("Animation_i26do")
+}
+
+[node name="HUD" type="Control"]
+texture_filter = 3
+custom_minimum_size = Vector2(480, 270)
+layout_mode = 3
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 1.5
+anchor_bottom = 1.5
+offset_right = -480.0
+offset_bottom = -270.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_uxe18")
+
+[node name="HealthBarBackground" type="Sprite2D" parent="."]
+position = Vector2(240, 256)
+texture = SubResource("AtlasTexture_xrg5j")
+
+[node name="HealthBar" type="TextureProgressBar" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 40.0
+offset_top = -24.0
+value = 50.0
+texture_progress = SubResource("AtlasTexture_fef4a")
+
+[node name="Announcement" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.337255)
+z_index = 1
+position = Vector2(240, 135)
+texture = ExtResource("3_kx4tr")
+
+[node name="Text" type="Label" parent="Announcement"]
+modulate = Color(100, 100, 100, 1)
+offset_left = -240.0
+offset_top = -35.0
+offset_right = 240.0
+offset_bottom = 35.0
+text = "FIGHT !"
+label_settings = ExtResource("4_r3lpq")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="Announcement"]
+visible = false
+z_index = -1
+position = Vector2(0, -74)
+texture = SubResource("AtlasTexture_i20c2")
+
+[node name="Shadow" type="Sprite2D" parent="Announcement"]
+modulate = Color(0.501961, 0.501961, 0.501961, 1)
+z_index = -1
+position = Vector2(0, 10)
+texture = ExtResource("3_kx4tr")
+
+[node name="Borders" type="Sprite2D" parent="."]
+texture = ExtResource("4_y1wtp")
+centered = false
+
+[node name="Animation" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_lp8d8")
+}

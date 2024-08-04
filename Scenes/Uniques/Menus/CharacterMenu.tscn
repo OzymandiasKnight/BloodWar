@@ -1,0 +1,89 @@
+[gd_scene load_steps=5 format=3 uid="uid://cpk6n1xsmbstk"]
+
+[ext_resource type="Script" path="res://Codes/Uniques/Menus/CharacterMenu.gd" id="1_8htx2"]
+[ext_resource type="PackedScene" uid="uid://cvpuef5avh2rm" path="res://Scenes/Instances/Interfaces/PlayerSelection.tscn" id="2_da7l4"]
+[ext_resource type="Resource" uid="uid://dv0dx44vklit1" path="res://Ressources/Instances/InputPacks/KeyboardInputPack.tres" id="4_723w8"]
+[ext_resource type="PackedScene" uid="uid://c06c7ftn8l5lx" path="res://Scenes/Instances/Interfaces/JoypadIcon.tscn" id="6_y17ia"]
+
+[node name="CharacterMenu" type="CanvasLayer"]
+script = ExtResource("1_8htx2")
+
+[node name="Camera" type="Camera2D" parent="."]
+position = Vector2(240, 135)
+zoom = Vector2(2, 2)
+
+[node name="Window" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 480.0
+offset_bottom = 270.0
+mouse_filter = 1
+
+[node name="Players" type="HBoxContainer" parent="Window"]
+custom_minimum_size = Vector2(400, 135)
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -17.5
+offset_bottom = -17.5
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Keyboard" parent="Window/Players" instance=ExtResource("2_da7l4")]
+layout_mode = 2
+input_pack = ExtResource("4_723w8")
+
+[node name="Controller1" parent="Window/Players" instance=ExtResource("2_da7l4")]
+layout_mode = 2
+controller_id = 0
+
+[node name="Controller2" parent="Window/Players" instance=ExtResource("2_da7l4")]
+layout_mode = 2
+controller_id = 1
+
+[node name="Button" type="Button" parent="Window"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.1
+anchor_right = 0.1
+offset_left = -36.0
+offset_top = 13.0
+offset_right = 81.0
+offset_bottom = 53.0
+text = "Quit"
+
+[node name="Joypads" type="HBoxContainer" parent="Window"]
+custom_minimum_size = Vector2(108, 27)
+layout_mode = 0
+offset_left = 372.0
+offset_right = 480.0
+offset_bottom = 27.0
+
+[node name="JoypadIcon" parent="Window/Joypads" instance=ExtResource("6_y17ia")]
+layout_mode = 2
+
+[node name="JoypadIcon2" parent="Window/Joypads" instance=ExtResource("6_y17ia")]
+layout_mode = 2
+
+[node name="JoypadIcon3" parent="Window/Joypads" instance=ExtResource("6_y17ia")]
+layout_mode = 2
+
+[node name="JoypadIcon4" parent="Window/Joypads" instance=ExtResource("6_y17ia")]
+layout_mode = 2
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+visible = false
+texture_filter = 3
+offset_right = 480.0
+offset_bottom = 270.0
+scale = Vector2(2, 2)
+
+[node name="Viewport" type="SubViewport" parent="SubViewportContainer"]
+handle_input_locally = false
+size = Vector2i(480, 270)
+render_target_update_mode = 0
+
+[connection signal="pressed" from="Window/Button" to="." method="_on_button_pressed"]

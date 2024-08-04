@@ -1,0 +1,123 @@
+[gd_scene load_steps=13 format=3 uid="uid://dcxyeex6jq701"]
+
+[ext_resource type="Script" path="res://Codes/Instances/Classes/Projectile.gd" id="1_wdb1v"]
+[ext_resource type="Script" path="res://addons/fight_system/HitBox.gd" id="2_x27e3"]
+[ext_resource type="Shader" path="res://Ressources/Uniques/Shaders/ColorSwap.gdshader" id="3_blhqy"]
+[ext_resource type="Texture2D" uid="uid://0jh6oi1yoaq8" path="res://Textures/Instances/Props/Projectiles.png" id="3_q7h0d"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_484qm"]
+size = Vector2(6, 6)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6cbqg"]
+size = Vector2(4, 4)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fk25q"]
+resource_local_to_scene = true
+shader = ExtResource("3_blhqy")
+shader_parameter/replace_p_color = null
+shader_parameter/replace_s_color = null
+shader_parameter/replace_t_color = null
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f8g86"]
+atlas = ExtResource("3_q7h0d")
+region = Rect2(0, 0, 168, 24)
+
+[sub_resource type="Animation" id="Animation_ay2rn"]
+resource_name = "Deploy"
+length = 0.1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Texture:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+
+[sub_resource type="Animation" id="Animation_i5car"]
+resource_name = "Destroy"
+length = 0.2
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Texture:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [3, 4, 5, 6]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.2),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gvt8k"]
+_data = {
+"Deploy": SubResource("Animation_ay2rn"),
+"Destroy": SubResource("Animation_i5car")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h4pje"]
+size = Vector2(24, 2)
+
+[node name="Spear" type="CharacterBody2D" node_paths=PackedStringArray("hitbox", "terrain_box")]
+texture_filter = 3
+script = ExtResource("1_wdb1v")
+hitbox = NodePath("HitBox")
+terrain_box = NodePath("Terrain")
+speed = 625.0
+weight = 5.0
+lifetime = 3.0
+rotative = true
+
+[node name="HitBox" type="Area2D" parent="."]
+position = Vector2(11, 0)
+script = ExtResource("2_x27e3")
+effect = "wounded"
+effect_strenght = 50
+damage = 30
+knockback = Vector2(10, 0)
+
+[node name="Collision" type="CollisionShape2D" parent="HitBox"]
+shape = SubResource("RectangleShape2D_484qm")
+
+[node name="Terrain" type="Area2D" parent="."]
+position = Vector2(11, 0)
+collision_layer = 2
+collision_mask = 2
+
+[node name="Collision" type="CollisionShape2D" parent="Terrain"]
+shape = SubResource("RectangleShape2D_6cbqg")
+
+[node name="Texture" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_fk25q")
+texture = SubResource("AtlasTexture_f8g86")
+hframes = 7
+frame = 1
+
+[node name="Animation" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_gvt8k")
+}
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_h4pje")

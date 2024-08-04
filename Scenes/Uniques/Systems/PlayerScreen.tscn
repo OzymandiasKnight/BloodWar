@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://c5x6442v7gqak"]
+
+[ext_resource type="Script" path="res://Codes/Uniques/Systems/PlayerScreen.gd" id="1_cvric"]
+
+[node name="Container" type="SubViewportContainer"]
+custom_minimum_size = Vector2(480, 270)
+offset_right = 480.0
+offset_bottom = 270.0
+script = ExtResource("1_cvric")
+
+[node name="Viewport" type="SubViewport" parent="."]
+disable_3d = true
+handle_input_locally = false
+size = Vector2i(480, 270)
+render_target_update_mode = 4
+
+[node name="Camera" type="Camera2D" parent="Viewport"]

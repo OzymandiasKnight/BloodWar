@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://pg3y7xcl01nl"]
+
+[ext_resource type="Texture2D" uid="uid://cqnlk57477pag" path="res://Textures/Instances/Interfaces/PlayerCard.png" id="1_jbuhx"]
+[ext_resource type="Script" path="res://Codes/Instances/Interfaces/PlayerCard.gd" id="1_o4esl"]
+[ext_resource type="Shader" path="res://Ressources/Uniques/Shaders/ColorSwap.gdshader" id="2_kvlpd"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ppyud"]
+shader = ExtResource("2_kvlpd")
+shader_parameter/replace_p_color = null
+shader_parameter/replace_s_color = null
+
+[node name="PlayerCard" type="Node2D"]
+texture_filter = 3
+script = ExtResource("1_o4esl")
+
+[node name="Panel" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_ppyud")
+texture = ExtResource("1_jbuhx")
+hframes = 3
+
+[node name="Border" type="Sprite2D" parent="."]
+texture = ExtResource("1_jbuhx")
+hframes = 3
+frame = 1

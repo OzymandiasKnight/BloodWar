@@ -1,0 +1,115 @@
+[gd_scene load_steps=15 format=3 uid="uid://ct70ef08rhvwj"]
+
+[ext_resource type="Script" path="res://addons/platformer_system/StateMachine.gd" id="1_hgmuv"]
+[ext_resource type="Script" path="res://Codes/Instances/States/PlayerIdle.gd" id="2_aop1m"]
+[ext_resource type="Script" path="res://Codes/Instances/States/PlayerWalk.gd" id="3_w2167"]
+[ext_resource type="Script" path="res://Codes/Instances/States/PlayerTeleport.gd" id="4_01kqi"]
+[ext_resource type="Script" path="res://Codes/Instances/States/PlayerFall.gd" id="4_dqjvr"]
+[ext_resource type="Script" path="res://Codes/Instances/States/PlayerRun.gd" id="4_o6sfb"]
+[ext_resource type="Script" path="res://Codes/Instances/States/PlayerJump.gd" id="5_day2h"]
+[ext_resource type="Script" path="res://Codes/Instances/States/PlayerThrow.gd" id="7_l0aw0"]
+[ext_resource type="Script" path="res://Codes/Instances/States/PlayerAttackAnimation.gd" id="9_ow1gg"]
+[ext_resource type="Script" path="res://Codes/Instances/States/PlayerDeath.gd" id="9_xqoiq"]
+[ext_resource type="Script" path="res://Codes/Instances/States/PlayerSpawn.gd" id="11_paxdt"]
+[ext_resource type="Script" path="res://Codes/Instances/States/PlayerParry.gd" id="12_jgdx7"]
+[ext_resource type="Script" path="res://Codes/Instances/States/PlayerStun.gd" id="13_phc8o"]
+[ext_resource type="Script" path="res://Codes/Instances/States/PlayerEdge.gd" id="15_hb4gd"]
+
+[node name="StateMachine" type="Node" node_paths=PackedStringArray("default_state")]
+script = ExtResource("1_hgmuv")
+default_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="."]
+script = ExtResource("2_aop1m")
+can_fall = true
+can_jump = true
+entry_animation = "Idle"
+
+[node name="Walk" type="Node" parent="."]
+script = ExtResource("3_w2167")
+walk_speed = 50
+use_cost = 20
+can_fall = true
+can_jump = true
+
+[node name="Run" type="Node" parent="."]
+script = ExtResource("4_o6sfb")
+speed = 175
+use_cost = 35
+can_fall = true
+can_jump = true
+entry_animation = "Run"
+
+[node name="Fall" type="Node" parent="."]
+script = ExtResource("4_dqjvr")
+use_cost = 5
+grace_time = 0.2
+entry_animation = "Fall"
+
+[node name="Teleport" type="Node" parent="."]
+script = ExtResource("4_01kqi")
+teleport_distance = 125.0
+activation_time = 0.25
+entry_animation = "Teleport"
+
+[node name="Jump" type="Node" parent="."]
+script = ExtResource("5_day2h")
+can_fall = true
+entry_animation = "Jump"
+
+[node name="Throw" type="Node" parent="."]
+script = ExtResource("7_l0aw0")
+throw_time = 0.5
+entry_animation = "Throw"
+
+[node name="StraightPunch" type="Node" parent="."]
+script = ExtResource("9_ow1gg")
+duration = 0.4
+slow_speed = true
+gravity = true
+entry_animation = "StraightPunch"
+
+[node name="DashSlash" type="Node" parent="."]
+script = ExtResource("9_ow1gg")
+duration = 1.1
+raw_stop = true
+slow_speed = true
+gravity = true
+entry_animation = "DashSlash"
+
+[node name="DownPunch" type="Node" parent="."]
+script = ExtResource("9_ow1gg")
+after_state = "Fall"
+duration = 0.3
+gravity = true
+entry_animation = "DownPunch"
+
+[node name="Death" type="Node" parent="."]
+script = ExtResource("9_xqoiq")
+
+[node name="Spawn" type="Node" parent="."]
+script = ExtResource("11_paxdt")
+ready_time = 2.0
+entry_animation = "Idle"
+
+[node name="Parry" type="Node" parent="."]
+script = ExtResource("12_jgdx7")
+animation_time = 0.6
+entry_animation = "Parry"
+
+[node name="Stun" type="Node" parent="."]
+script = ExtResource("13_phc8o")
+stun_time = 0.75
+entry_animation = "Stun"
+
+[node name="Edge" type="Node" parent="."]
+script = ExtResource("15_hb4gd")
+offset = Vector2(16, 27)
+entry_animation = "Edge"
+
+[node name="WalkKick" type="Node" parent="."]
+script = ExtResource("9_ow1gg")
+duration = 0.6
+slow_speed = true
+gravity = true
+entry_animation = "WalkKick"
