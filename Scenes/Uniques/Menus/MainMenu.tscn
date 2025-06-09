@@ -1,17 +1,136 @@
-[gd_scene load_steps=2 format=3 uid="uid://o6g7v3q74mk2"]
+[gd_scene load_steps=11 format=3 uid="uid://o6g7v3q74mk2"]
 
-[ext_resource type="Script" path="res://Codes/Uniques/Menus/MainMenu.gd" id="1_s6tj8"]
+[ext_resource type="Script" uid="uid://bt5cddgg2ql4w" path="res://Codes/Uniques/Menus/MainMenu.gd" id="1_s6tj8"]
+[ext_resource type="Shader" uid="uid://di5bs2k8psgig" path="res://Ressources/Uniques/Shaders/MovingShards.gdshader" id="2_pc2h4"]
+[ext_resource type="PackedScene" uid="uid://dtgu1b7yifunr" path="res://Scenes/Instances/Interfaces/MenuButton.tscn" id="2_vuaaf"]
+[ext_resource type="LabelSettings" uid="uid://hfcxv7q3cbv7" path="res://Ressources/Uniques/Themes/OutlineText.tres" id="5_67r5f"]
+[ext_resource type="Texture2D" uid="uid://ddbgbmlj015pq" path="res://Textures/Instances/Interfaces/MenuButton.png" id="5_hof1a"]
+[ext_resource type="Texture2D" uid="uid://qq4mhwoo7ndv" path="res://Textures/Uniques/Art/GodotCredit.png" id="6_dkr13"]
 
-[node name="MainMenu" type="Node2D"]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_lyh1a"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_whtxg"]
+seamless = true
+noise = SubResource("FastNoiseLite_lyh1a")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_m24qo"]
+shader = ExtResource("2_pc2h4")
+shader_parameter/noise = SubResource("NoiseTexture2D_whtxg")
+shader_parameter/p_color = Color(0.0745098, 0.133333, 0.262745, 1)
+shader_parameter/s_color = Color(0, 0, 0, 0)
+shader_parameter/colors_alpha = true
+shader_parameter/height = 0.3
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_atm4j"]
+atlas = ExtResource("5_hof1a")
+region = Rect2(0, 30, 200, 30)
+
+[node name="MainMenu" type="CanvasLayer"]
 script = ExtResource("1_s6tj8")
 
 [node name="Camera" type="Camera2D" parent="."]
 
-[node name="Fight" type="Button" parent="."]
-offset_left = -194.0
-offset_top = 88.0
-offset_right = 241.0
-offset_bottom = 178.0
-text = "Play"
+[node name="Container" type="SubViewportContainer" parent="."]
+texture_filter = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -480.0
+offset_bottom = -270.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2, 2)
 
-[connection signal="pressed" from="Fight" to="." method="_on_fight_pressed"]
+[node name="Viewport" type="SubViewport" parent="Container"]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(480, 270)
+render_target_update_mode = 4
+
+[node name="Window" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 480.0
+offset_bottom = 270.0
+mouse_filter = 2
+
+[node name="Background" type="ColorRect" parent="Window"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.054902, 0.0588235, 0.172549, 1)
+
+[node name="Fire" type="ColorRect" parent="Window/Background"]
+material = SubResource("ShaderMaterial_m24qo")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.054902, 0.0588235, 0.172549, 1)
+
+[node name="Buttons" type="VBoxContainer" parent="Window"]
+texture_filter = 3
+layout_mode = 0
+offset_left = 140.0
+offset_right = 340.0
+offset_bottom = 270.0
+alignment = 1
+
+[node name="Play" parent="Window/Buttons" instance=ExtResource("2_vuaaf")]
+layout_mode = 2
+texture_hold = SubResource("AtlasTexture_atm4j")
+label = "Play"
+
+[node name="Help" parent="Window/Buttons" instance=ExtResource("2_vuaaf")]
+layout_mode = 2
+texture_hold = SubResource("AtlasTexture_atm4j")
+label = "Help"
+
+[node name="Title" type="Label" parent="Window"]
+texture_filter = 3
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+offset_bottom = 40.0
+text = "Blood War"
+label_settings = ExtResource("5_67r5f")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Credits" type="Label" parent="Window"]
+texture_filter = 3
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+offset_left = 398.0
+offset_top = 228.0
+offset_right = -2.0
+offset_bottom = 268.0
+text = "Godot Engine"
+label_settings = ExtResource("5_67r5f")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="Window/Credits"]
+position = Vector2(39, -9)
+texture = ExtResource("6_dkr13")
+
+[node name="Label" type="Label" parent="Window"]
+texture_filter = 3
+layout_mode = 0
+offset_top = 246.0
+offset_right = 150.0
+offset_bottom = 269.0
+text = "Made by Ozaymandias Knight"
+label_settings = ExtResource("5_67r5f")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="Window/Buttons/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="Window/Buttons/Help" to="." method="_on_help_pressed"]

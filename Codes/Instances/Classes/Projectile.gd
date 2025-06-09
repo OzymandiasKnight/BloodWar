@@ -67,5 +67,6 @@ func hitbox_hit(hurtbox:HurtBox):
 
 
 func terrain_body_entered(body):
-	if body is TileMap:
+	print(body)
+	if body is TileMapLayer:
 		kill_self()

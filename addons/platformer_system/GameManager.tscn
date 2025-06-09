@@ -1,11 +1,12 @@
-[gd_scene load_steps=11 format=3 uid="uid://bjwnv5usdy6pe"]
+[gd_scene load_steps=13 format=3 uid="uid://bjwnv5usdy6pe"]
 
-[ext_resource type="Script" path="res://addons/platformer_system/GameManager.gd" id="1_gid6q"]
+[ext_resource type="Script" uid="uid://oncimalox8e6" path="res://addons/platformer_system/GameManager.gd" id="1_gid6q"]
 [ext_resource type="PackedScene" uid="uid://ji0y1ygsy1eo" path="res://Scenes/Uniques/Systems/LevelManager.tscn" id="2_8xb3b"]
-[ext_resource type="Script" path="res://addons/platformer_system/SceneKey.gd" id="2_dumx6"]
+[ext_resource type="Script" uid="uid://bqcbm863ewoxv" path="res://addons/platformer_system/SceneKey.gd" id="2_dumx6"]
 [ext_resource type="PackedScene" uid="uid://o6g7v3q74mk2" path="res://Scenes/Uniques/Menus/MainMenu.tscn" id="3_c4eof"]
 [ext_resource type="PackedScene" uid="uid://bpi7eew3je7yr" path="res://Scenes/Uniques/Menus/WinScene.tscn" id="5_1svwr"]
 [ext_resource type="PackedScene" uid="uid://cpk6n1xsmbstk" path="res://Scenes/Uniques/Menus/CharacterMenu.tscn" id="6_5cg63"]
+[ext_resource type="PackedScene" uid="uid://43fv5sxm5gyl" path="res://Scenes/Uniques/Menus/CharacterMoves.tscn" id="7_4iu7x"]
 
 [sub_resource type="Resource" id="Resource_1d7yh"]
 script = ExtResource("2_dumx6")
@@ -35,8 +36,15 @@ path = ExtResource("6_5cg63")
 in_animation = ""
 out_animation = ""
 
+[sub_resource type="Resource" id="Resource_6a3j0"]
+script = ExtResource("2_dumx6")
+scene = "menu_moves"
+path = ExtResource("7_4iu7x")
+in_animation = ""
+out_animation = ""
+
 [node name="GameManager" type="CanvasLayer"]
 script = ExtResource("1_gid6q")
-scenes = Array[ExtResource("2_dumx6")]([SubResource("Resource_1d7yh"), SubResource("Resource_2lgck"), SubResource("Resource_48crq"), SubResource("Resource_urupv")])
+scenes = Array[ExtResource("2_dumx6")]([SubResource("Resource_1d7yh"), SubResource("Resource_2lgck"), SubResource("Resource_48crq"), SubResource("Resource_urupv"), SubResource("Resource_6a3j0")])
 
 [node name="Transitions" type="AnimationPlayer" parent="."]

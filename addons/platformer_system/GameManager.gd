@@ -56,4 +56,3 @@ func load_file(path:String,default_value:Variant) -> Variant:
 	else:
 		save_file(path,default_value)
 		return default_value
-

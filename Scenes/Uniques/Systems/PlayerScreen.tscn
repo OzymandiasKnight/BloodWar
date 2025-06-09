@@ -1,8 +1,9 @@
 [gd_scene load_steps=2 format=3 uid="uid://c5x6442v7gqak"]
 
-[ext_resource type="Script" path="res://Codes/Uniques/Systems/PlayerScreen.gd" id="1_cvric"]
+[ext_resource type="Script" uid="uid://cymd5mn5871ui" path="res://Codes/Uniques/Systems/PlayerScreen.gd" id="1_cvric"]
 
 [node name="Container" type="SubViewportContainer"]
+texture_filter = 3
 custom_minimum_size = Vector2(480, 270)
 offset_right = 480.0
 offset_bottom = 270.0
@@ -11,7 +12,12 @@ script = ExtResource("1_cvric")
 [node name="Viewport" type="SubViewport" parent="."]
 disable_3d = true
 handle_input_locally = false
+canvas_item_default_texture_filter = 3
 size = Vector2i(480, 270)
 render_target_update_mode = 4
 
 [node name="Camera" type="Camera2D" parent="Viewport"]
+limit_left = -1920
+limit_top = -1080
+limit_right = 1920
+limit_bottom = 1080

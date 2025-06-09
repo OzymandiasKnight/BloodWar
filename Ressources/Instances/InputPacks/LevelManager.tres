@@ -1,13 +1,14 @@
 [gd_resource type="Resource" script_class="InputPack" load_steps=4 format=3 uid="uid://584wspji34c8"]
 
-[ext_resource type="Script" path="res://addons/platformer_system/InputAction.gd" id="1_edhw2"]
-[ext_resource type="Script" path="res://addons/platformer_system/InputPack.gd" id="1_s5wri"]
+[ext_resource type="Script" uid="uid://d33ysyymtchi6" path="res://addons/platformer_system/InputAction.gd" id="1_edhw2"]
+[ext_resource type="Script" uid="uid://d1qhgwfov56qy" path="res://addons/platformer_system/InputPack.gd" id="1_s5wri"]
 
 [sub_resource type="Resource" id="Resource_iwnfc"]
 script = ExtResource("1_edhw2")
 input = "escape"
 action = "pause"
 max_frames = 150
+joypad_trigger = false
 instant_release = false
 
 [resource]

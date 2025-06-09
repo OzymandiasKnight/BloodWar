@@ -2,10 +2,12 @@ extends PlayerState
 
 @export var after_state:String = "Idle"
 @export var duration:float = 0.5
-@export var raw_stop:bool = false
-@export var slow_speed:bool = false
+##Negative = Ineffective, 0 = Instant Stop, Positive = Time for to fully stop
+@export var deceleration_time:float = -1.0
+@export var reset_gravity:bool = false
 @export var gravity:bool = false
 var timer:Timer = Timer.new()
+var slow_timer := Timer.new()
 
 var base_speed:float = 0.0
 
@@ -14,18 +16,27 @@ func Ready():
 	timer.set_wait_time(duration)
 	timer.connect("timeout",idle)
 	add_child(timer)
+	if deceleration_time > 0.0:
+		slow_timer.set_wait_time(deceleration_time)
+		slow_timer.timeout.connect(stopped)
+		add_child(slow_timer)
 
 func Enter(_old_state):
-	if raw_stop:
+	if deceleration_time == 0.0:
 		player.vel_mov.x = 0
+	if deceleration_time > 0.0:
+		slow_timer.start()
 	base_speed = player.vel_mov.x
 	timer.start()
 
-func PhysicsProcess(delta:float):
+func PhysicsProcess(_delta:float):
 	if gravity:
 		apply_gravity()
-	if slow_speed:
-		player.vel_mov.x = base_speed*(timer.time_left/duration)
+	if deceleration_time > 0.0:
+		player.vel_mov.x = base_speed*(slow_timer.time_left/duration)
+
+func stopped():
+	slow_timer.stop()
 
 func idle():
 	timer.stop()
@@ -33,3 +44,5 @@ func idle():
 	
 func Exit(_new_state):
 	timer.stop()
+	if reset_gravity:
+		player.vel_gra.y = 0.0

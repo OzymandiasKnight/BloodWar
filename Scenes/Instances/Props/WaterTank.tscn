@@ -1,0 +1,235 @@
+[gd_scene load_steps=21 format=3 uid="uid://ddrq702goyl14"]
+
+[ext_resource type="Script" uid="uid://cu7t1sj5aeg0" path="res://Codes/Instances/Classes/Prop.gd" id="1_78cb3"]
+[ext_resource type="Script" uid="uid://djnk7jncivdhm" path="res://addons/fight_system/HealthComponent.gd" id="2_7skck"]
+[ext_resource type="Script" uid="uid://bo1jlxvgwbpxo" path="res://addons/fight_system/HurtBox.gd" id="3_pynmx"]
+[ext_resource type="Texture2D" uid="uid://bwlgvryq2h3l0" path="res://Textures/Instances/Props/Map/WaterTank.tres" id="4_q3h6m"]
+[ext_resource type="Shader" uid="uid://d1l8rskkjoia4" path="res://Ressources/Uniques/Shaders/Liquid.gdshader" id="5_rlc08"]
+[ext_resource type="Texture2D" uid="uid://tueerhgphoy2" path="res://Textures/Instances/Props/Shards/WaterFlowJet.tres" id="6_nq588"]
+[ext_resource type="Script" uid="uid://75vagdi0vgs1" path="res://Codes/Instances/Classes/SpriteParticle.gd" id="7_3tljl"]
+[ext_resource type="Texture2D" uid="uid://dxvbcvaosm287" path="res://Textures/Instances/Props/Particles.png" id="8_1g10v"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qu54u"]
+size = Vector2(71, 103)
+
+[sub_resource type="Gradient" id="Gradient_vlq46"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ftgp6"]
+noise_type = 0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_c1neq"]
+width = 48
+height = 64
+seamless = true
+color_ramp = SubResource("Gradient_vlq46")
+noise = SubResource("FastNoiseLite_ftgp6")
+
+[sub_resource type="Gradient" id="Gradient_8413j"]
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_81sl1"]
+gradient = SubResource("Gradient_8413j")
+
+[sub_resource type="Gradient" id="Gradient_vsw2q"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.6, 0.8)
+colors = PackedColorArray(0.301961, 0.607843, 0.901961, 1, 0.60494, 0.778056, 0.944514, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_kgty1"]
+gradient = SubResource("Gradient_vsw2q")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gwm6x"]
+shader = ExtResource("5_rlc08")
+shader_parameter/noise = SubResource("NoiseTexture2D_c1neq")
+shader_parameter/ramp_color = SubResource("GradientTexture1D_kgty1")
+shader_parameter/ramp_alpha = SubResource("GradientTexture1D_81sl1")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1gqng"]
+size = Vector2(52, 42)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_42f7h"]
+size = Vector2(40, 2)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p0ewk"]
+atlas = ExtResource("8_1g10v")
+region = Rect2(96, 0, 24, 96)
+
+[node name="WaterTank" type="CharacterBody2D" node_paths=PackedStringArray("hurtbox", "destroy_particles_parent", "hit_particles_parent", "health_component")]
+texture_filter = 3
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_78cb3")
+hard = true
+hurtbox = NodePath("HurtBox")
+destroy_particles_parent = NodePath("Particles")
+hit_particles_parent = NodePath("HitParticle")
+health_component = NodePath("Health")
+
+[node name="Health" type="Node" parent="."]
+script = ExtResource("2_7skck")
+health = 200
+toughness = 15
+
+[node name="HurtBox" type="Area2D" parent="." node_paths=PackedStringArray("health_component")]
+position = Vector2(0, -60)
+script = ExtResource("3_pynmx")
+health_component = NodePath("../Health")
+
+[node name="Collision" type="CollisionShape2D" parent="HurtBox"]
+position = Vector2(-0.5, 8.5)
+shape = SubResource("RectangleShape2D_qu54u")
+
+[node name="Normal" type="Node2D" parent="."]
+
+[node name="Texture" type="Sprite2D" parent="Normal"]
+position = Vector2(-1, -60)
+texture = ExtResource("4_q3h6m")
+hframes = 2
+
+[node name="Destroyed" type="Node2D" parent="."]
+position = Vector2(0, -60)
+
+[node name="Texture" type="Sprite2D" parent="Destroyed"]
+texture = ExtResource("4_q3h6m")
+hframes = 2
+frame = 1
+
+[node name="Water" type="Sprite2D" parent="Destroyed"]
+material = SubResource("ShaderMaterial_gwm6x")
+position = Vector2(26, 37)
+texture = ExtResource("6_nq588")
+
+[node name="Top" type="CollisionShape2D" parent="."]
+position = Vector2(0, -81)
+shape = SubResource("RectangleShape2D_1gqng")
+metadata/destroyed = false
+
+[node name="Platform" type="CollisionShape2D" parent="."]
+position = Vector2(5, -68)
+shape = SubResource("RectangleShape2D_42f7h")
+one_way_collision = true
+metadata/destroyed = true
+
+[node name="Cloud" type="Sprite2D" parent="."]
+position = Vector2(0, -10)
+script = ExtResource("7_3tljl")
+
+[node name="Particles" type="Node2D" parent="."]
+
+[node name="SpriteParticle" type="Sprite2D" parent="Particles"]
+position = Vector2(0, -18)
+scale = Vector2(1.5, 1.5)
+texture = SubResource("AtlasTexture_p0ewk")
+vframes = 4
+script = ExtResource("7_3tljl")
+random_rotation = true
+min_size = 0.5
+
+[node name="SpriteParticle2" type="Sprite2D" parent="Particles"]
+position = Vector2(-24, -18)
+scale = Vector2(1.5, 1.5)
+texture = SubResource("AtlasTexture_p0ewk")
+vframes = 4
+script = ExtResource("7_3tljl")
+random_rotation = true
+min_size = 0.5
+
+[node name="SpriteParticle3" type="Sprite2D" parent="Particles"]
+position = Vector2(24, -18)
+scale = Vector2(1.5, 1.5)
+texture = SubResource("AtlasTexture_p0ewk")
+vframes = 4
+script = ExtResource("7_3tljl")
+random_rotation = true
+min_size = 0.5
+
+[node name="SpriteParticle4" type="Sprite2D" parent="Particles"]
+position = Vector2(12, -24)
+scale = Vector2(1.5, 1.5)
+texture = SubResource("AtlasTexture_p0ewk")
+vframes = 4
+script = ExtResource("7_3tljl")
+random_rotation = true
+min_size = 0.5
+
+[node name="SpriteParticle5" type="Sprite2D" parent="Particles"]
+position = Vector2(-12, -24)
+scale = Vector2(1.5, 1.5)
+texture = SubResource("AtlasTexture_p0ewk")
+vframes = 4
+script = ExtResource("7_3tljl")
+random_rotation = true
+min_size = 0.5
+
+[node name="SpriteParticle6" type="Sprite2D" parent="Particles"]
+position = Vector2(-24, -24)
+scale = Vector2(2, 2)
+texture = SubResource("AtlasTexture_p0ewk")
+vframes = 4
+script = ExtResource("7_3tljl")
+random_rotation = true
+min_size = 0.5
+
+[node name="SpriteParticle7" type="Sprite2D" parent="Particles"]
+position = Vector2(24, -24)
+scale = Vector2(2, 2)
+texture = SubResource("AtlasTexture_p0ewk")
+vframes = 4
+script = ExtResource("7_3tljl")
+random_rotation = true
+min_size = 0.5
+
+[node name="SpriteParticle8" type="Sprite2D" parent="Particles"]
+position = Vector2(-12, -36)
+scale = Vector2(2, 2)
+texture = SubResource("AtlasTexture_p0ewk")
+vframes = 4
+script = ExtResource("7_3tljl")
+random_rotation = true
+min_size = 0.5
+
+[node name="SpriteParticle9" type="Sprite2D" parent="Particles"]
+position = Vector2(12, -36)
+scale = Vector2(2, 2)
+texture = SubResource("AtlasTexture_p0ewk")
+vframes = 4
+script = ExtResource("7_3tljl")
+random_rotation = true
+min_size = 0.5
+
+[node name="SpriteParticle10" type="Sprite2D" parent="Particles"]
+position = Vector2(-1.19209e-07, -30)
+scale = Vector2(2.5, 2.5)
+texture = SubResource("AtlasTexture_p0ewk")
+vframes = 4
+script = ExtResource("7_3tljl")
+random_rotation = true
+min_size = 0.5
+
+[node name="SpriteParticle11" type="Sprite2D" parent="Particles"]
+position = Vector2(0, -36)
+scale = Vector2(3, 3)
+texture = SubResource("AtlasTexture_p0ewk")
+vframes = 4
+script = ExtResource("7_3tljl")
+random_rotation = true
+min_size = 0.5
+
+[node name="SpriteParticle12" type="Sprite2D" parent="Particles"]
+position = Vector2(-16, -48)
+scale = Vector2(2, 2)
+texture = SubResource("AtlasTexture_p0ewk")
+vframes = 4
+script = ExtResource("7_3tljl")
+random_rotation = true
+min_size = 0.5
+
+[node name="SpriteParticle13" type="Sprite2D" parent="Particles"]
+position = Vector2(16, -48)
+scale = Vector2(2, 2)
+texture = SubResource("AtlasTexture_p0ewk")
+vframes = 4
+script = ExtResource("7_3tljl")
+random_rotation = true
+min_size = 0.5
+
+[node name="HitParticle" type="Node2D" parent="."]

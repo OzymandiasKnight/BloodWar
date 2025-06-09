@@ -13,9 +13,15 @@ func Ready():
 	add_child(timer)
 	timer.stop()
 	player.blocked_hit.connect(parried)
+	player.get_hit.connect(got_hit)
 
-func parried(a,b):
-	unparry()
+func parried(_a,_b):
+	if is_current():
+		unparry()
+
+func got_hit(_a,_b):
+	if is_current():
+		unparry()
 
 func Enter(_old_state):
 	timer.stop()

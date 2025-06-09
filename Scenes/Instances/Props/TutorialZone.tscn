@@ -1,0 +1,89 @@
+[gd_scene load_steps=10 format=3 uid="uid://ykwdmvwxjxbb"]
+
+[ext_resource type="Script" uid="uid://dpxtsvtko23gw" path="res://Codes/Instances/Props/TutorialZone.gd" id="1_ip4y3"]
+[ext_resource type="Shader" uid="uid://dxm52r2drmrok" path="res://Ressources/Uniques/Shaders/AreaLightRays.gdshader" id="1_vecqc"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_613k8"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_y56ff"]
+resource_local_to_scene = true
+width = 600
+height = 600
+seamless = true
+noise = SubResource("FastNoiseLite_613k8")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_oqacf"]
+resource_local_to_scene = true
+shader = ExtResource("1_vecqc")
+shader_parameter/noise = SubResource("NoiseTexture2D_y56ff")
+shader_parameter/show = 10.0
+
+[sub_resource type="Animation" id="Animation_el026"]
+resource_name = "Hide"
+length = 0.5
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/show")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.5)
+}
+
+[sub_resource type="Animation" id="Animation_e30ol"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/show")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(10, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_s8mli"]
+resource_name = "Show"
+length = 0.2
+step = 0.1
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/show")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, 0, 0, 0, 0, 1, 0, 0, 0, 0),
+"times": PackedFloat32Array(0, 0.2)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bfaln"]
+_data = {
+&"Hide": SubResource("Animation_el026"),
+&"RESET": SubResource("Animation_e30ol"),
+&"Show": SubResource("Animation_s8mli")
+}
+
+[node name="TutorialZone" type="ColorRect"]
+material = SubResource("ShaderMaterial_oqacf")
+offset_right = 30.0
+offset_bottom = 24.0
+color = Color(1, 0.960784, 0.25098, 1)
+script = ExtResource("1_ip4y3")
+
+[node name="Area" type="Area2D" parent="."]
+
+[node name="Collision" type="CollisionShape2D" parent="Area"]
+
+[node name="Animation" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_bfaln")
+}
+
+[connection signal="area_entered" from="Area" to="." method="_on_area_area_entered"]

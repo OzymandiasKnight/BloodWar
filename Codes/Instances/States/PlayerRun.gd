@@ -1,9 +1,11 @@
 extends PlayerState
 
-@export var speed:int = 50
 @export var use_cost:int = 10
 
+var speed:int = 50
+
 func Enter(old_state:State):
+	speed = player.stat_speed
 	if old_state.name == "Fall":
 		var entry_level = player.stat_weight+player.stat_jump
 		if player.vel_gra.y > entry_level:

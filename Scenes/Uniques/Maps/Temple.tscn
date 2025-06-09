@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cdoy6ayekcw4"]
 
-[ext_resource type="Script" path="res://Codes/Instances/Classes/Map.gd" id="1_dnc8k"]
+[ext_resource type="Script" uid="uid://c4ajiidp0o8fr" path="res://Codes/Instances/Classes/Map.gd" id="1_dnc8k"]
 [ext_resource type="TileSet" uid="uid://don4xm1vowfxu" path="res://Ressources/Uniques/Maps/Temple.tres" id="2_yujp3"]
 
 [node name="Temple" type="Node2D" node_paths=PackedStringArray("spawns")]

@@ -1,0 +1,6 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://du7od32sgsw1b"]
+
+[ext_resource type="Shader" path="res://Ressources/Uniques/Shaders/Liquid.gdshader" id="1_gvr6f"]
+
+[resource]
+shader = ExtResource("1_gvr6f")

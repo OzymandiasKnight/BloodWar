@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="InputPack" load_steps=4 format=3 uid="uid://cl2n13ttv0pc"]
+
+[ext_resource type="Script" uid="uid://d33ysyymtchi6" path="res://addons/platformer_system/InputAction.gd" id="1_xgptb"]
+[ext_resource type="Script" uid="uid://d1qhgwfov56qy" path="res://addons/platformer_system/InputPack.gd" id="2_4a4ng"]
+
+[sub_resource type="Resource" id="Resource_sujl8"]
+script = ExtResource("1_xgptb")
+input = "escape"
+action = "pause"
+max_frames = 0
+joypad_trigger = false
+instant_release = true
+
+[resource]
+script = ExtResource("2_4a4ng")
+inputs = Array[ExtResource("1_xgptb")]([SubResource("Resource_sujl8")])

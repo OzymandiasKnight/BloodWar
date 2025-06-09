@@ -1,0 +1,30 @@
+[gd_scene load_steps=3 format=3 uid="uid://c3v6fa38r2ndp"]
+
+[ext_resource type="Texture2D" uid="uid://bga7q44fbgnik" path="res://Textures/Instances/Interfaces/Icons/KeyBoardKey.tres" id="1_3asxl"]
+[ext_resource type="LabelSettings" uid="uid://hfcxv7q3cbv7" path="res://Ressources/Uniques/Themes/OutlineText.tres" id="2_6fus7"]
+
+[node name="Icon" type="Control"]
+texture_filter = 3
+custom_minimum_size = Vector2(23, 27)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -933.0
+offset_bottom = -513.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Icon" type="Sprite2D" parent="."]
+texture = ExtResource("1_3asxl")
+centered = false
+
+[node name="Key" type="Label" parent="."]
+visible = false
+layout_mode = 0
+offset_right = 27.0
+offset_bottom = 27.0
+text = "A"
+label_settings = ExtResource("2_6fus7")
+horizontal_alignment = 1
+vertical_alignment = 1

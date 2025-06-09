@@ -17,7 +17,7 @@ var joined:bool = false
 var skin:String = "Blood"
 var skin_id:int = 0
 
-var skin_choices:Array[String] = ["Blood","Fire","Thunder","Poison","Ice","Dimension","Void","Ink"]
+var skin_choices:Array[String] = ["Blood","Fire","Thunder","Poison","Ice","Dimension","Void","Ink","Cloud"]
 
 var is_ready:bool = false
 
@@ -39,7 +39,6 @@ func _ready():
 
 func _on_input_box_action_just_pressed(action_name):
 	if visible:
-		print(action_name)
 		if action_name == "jump":
 			if not is_ready:
 				leave()
@@ -55,9 +54,12 @@ func _on_input_box_action_just_pressed(action_name):
 				is_ready = !is_ready
 				if is_ready:
 					play_animation("Lock")
+					get_parent().get_parent().get_parent().get_parent().get_parent().player_lock(self)
 					emit_signal("set_ready")
 				else:
 					obj_animations.play_backwards("Lock")
+					get_parent().get_parent().get_parent().get_parent().get_parent().player_unlock(self)
+					
 			else:
 				play_animation("Input")
 			skin = skin_choices[skin_id]
@@ -65,12 +67,22 @@ func _on_input_box_action_just_pressed(action_name):
 			obj_character.queue_redraw()
 			obj_skin_name.text = skin
 	else:
-		play_animation("Join")
+		join()
 
 func play_animation(anim_name:String):
 	obj_animations.play(anim_name)
 
+func join():
+	var players_in:int = 0
+	for player in get_parent().get_children():
+		if player.visible:
+			players_in += 1
+	if players_in < 4:
+		play_animation("Join")
+	get_parent().get_parent().get_parent().get_parent().get_parent().player_joined(self)
+
 func leave():
+	get_parent().get_parent().get_parent().get_parent().get_parent().player_leave(self)
 	is_ready = false
 	if visible:
 		play_animation("Leave")

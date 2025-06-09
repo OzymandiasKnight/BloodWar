@@ -1,13 +1,14 @@
 [gd_resource type="Resource" script_class="InputPack" load_steps=9 format=3 uid="uid://dv0dx44vklit1"]
 
-[ext_resource type="Script" path="res://addons/platformer_system/InputAction.gd" id="1_xwm4n"]
-[ext_resource type="Script" path="res://addons/platformer_system/InputPack.gd" id="2_p78aq"]
+[ext_resource type="Script" uid="uid://d33ysyymtchi6" path="res://addons/platformer_system/InputAction.gd" id="1_xwm4n"]
+[ext_resource type="Script" uid="uid://d1qhgwfov56qy" path="res://addons/platformer_system/InputPack.gd" id="2_p78aq"]
 
 [sub_resource type="Resource" id="Resource_s4dlr"]
 script = ExtResource("1_xwm4n")
 input = "leftk1"
 action = "left"
 max_frames = 0
+joypad_trigger = false
 instant_release = true
 
 [sub_resource type="Resource" id="Resource_2n7lm"]
@@ -15,13 +16,15 @@ script = ExtResource("1_xwm4n")
 input = "rightk1"
 action = "right"
 max_frames = 0
+joypad_trigger = false
 instant_release = true
 
 [sub_resource type="Resource" id="Resource_spbl8"]
 script = ExtResource("1_xwm4n")
-input = "specialk1"
+input = "lightk1"
 action = "shift"
 max_frames = 0
+joypad_trigger = false
 instant_release = true
 
 [sub_resource type="Resource" id="Resource_xyvsy"]
@@ -29,6 +32,7 @@ script = ExtResource("1_xwm4n")
 input = "attackk1"
 action = "attack"
 max_frames = 0
+joypad_trigger = false
 instant_release = true
 
 [sub_resource type="Resource" id="Resource_yklww"]
@@ -36,6 +40,7 @@ script = ExtResource("1_xwm4n")
 input = "parryk1"
 action = "parry"
 max_frames = 60
+joypad_trigger = false
 instant_release = true
 
 [sub_resource type="Resource" id="Resource_77xc4"]
@@ -43,6 +48,7 @@ script = ExtResource("1_xwm4n")
 input = "upk1"
 action = "jump"
 max_frames = 0
+joypad_trigger = false
 instant_release = true
 
 [resource]

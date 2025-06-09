@@ -1,10 +1,13 @@
 extends PlayerState
 
-@export var walk_speed:int = 5
 @export var use_cost:int = 10
 
+var speed:int = 50
+
 func Enter(_old_state:State):
-	player.vel_mov.x = player.side_last*walk_speed
+	speed = int(float(player.stat_speed)/3)
+	
+	player.vel_mov.x = player.side_last*speed
 
 func PhysicsProcess(_delta:float):
 	player.set_side()

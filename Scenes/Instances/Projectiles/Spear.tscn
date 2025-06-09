@@ -1,8 +1,8 @@
 [gd_scene load_steps=13 format=3 uid="uid://dcxyeex6jq701"]
 
-[ext_resource type="Script" path="res://Codes/Instances/Classes/Projectile.gd" id="1_wdb1v"]
-[ext_resource type="Script" path="res://addons/fight_system/HitBox.gd" id="2_x27e3"]
-[ext_resource type="Shader" path="res://Ressources/Uniques/Shaders/ColorSwap.gdshader" id="3_blhqy"]
+[ext_resource type="Script" uid="uid://c8n17nefogn2k" path="res://Codes/Instances/Classes/Projectile.gd" id="1_wdb1v"]
+[ext_resource type="Script" uid="uid://dgq0fl0a7p6fa" path="res://addons/fight_system/HitBox.gd" id="2_x27e3"]
+[ext_resource type="Shader" uid="uid://cnwgql703tf0n" path="res://Ressources/Uniques/Shaders/ColorSwap.gdshader" id="3_blhqy"]
 [ext_resource type="Texture2D" uid="uid://0jh6oi1yoaq8" path="res://Textures/Instances/Props/Projectiles.png" id="3_q7h0d"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_484qm"]
@@ -14,9 +14,10 @@ size = Vector2(4, 4)
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_fk25q"]
 resource_local_to_scene = true
 shader = ExtResource("3_blhqy")
-shader_parameter/replace_p_color = null
-shader_parameter/replace_s_color = null
-shader_parameter/replace_t_color = null
+shader_parameter/brightness = 1.0
+shader_parameter/replace_p_color = Color(0, 0, 0, 1)
+shader_parameter/replace_s_color = Color(0, 0, 0, 1)
+shader_parameter/replace_t_color = Color(0, 0, 0, 1)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_f8g86"]
 atlas = ExtResource("3_q7h0d")
@@ -72,8 +73,8 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_gvt8k"]
 _data = {
-"Deploy": SubResource("Animation_ay2rn"),
-"Destroy": SubResource("Animation_i5car")
+&"Deploy": SubResource("Animation_ay2rn"),
+&"Destroy": SubResource("Animation_i5car")
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h4pje"]
@@ -90,7 +91,7 @@ lifetime = 3.0
 rotative = true
 
 [node name="HitBox" type="Area2D" parent="."]
-position = Vector2(11, 0)
+position = Vector2(-11, 0)
 script = ExtResource("2_x27e3")
 effect = "wounded"
 effect_strenght = 50
@@ -98,6 +99,7 @@ damage = 30
 knockback = Vector2(10, 0)
 
 [node name="Collision" type="CollisionShape2D" parent="HitBox"]
+position = Vector2(22, 0)
 shape = SubResource("RectangleShape2D_484qm")
 
 [node name="Terrain" type="Area2D" parent="."]

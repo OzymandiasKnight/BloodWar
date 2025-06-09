@@ -1,0 +1,8 @@
+[gd_resource type="CanvasTexture" load_steps=3 format=3 uid="uid://c03avwyd1ofnh"]
+
+[ext_resource type="Texture2D" uid="uid://cxi5hgsk3cknf" path="res://Textures/Uniques/Maps/City.png" id="1_5kw10"]
+[ext_resource type="Texture2D" uid="uid://b128pus0gedqh" path="res://Textures/Uniques/Maps/CityNormals.png" id="1_h24vi"]
+
+[resource]
+diffuse_texture = ExtResource("1_5kw10")
+normal_texture = ExtResource("1_h24vi")

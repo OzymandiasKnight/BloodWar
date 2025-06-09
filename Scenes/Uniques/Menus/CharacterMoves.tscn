@@ -1,0 +1,445 @@
+[gd_scene load_steps=19 format=3 uid="uid://43fv5sxm5gyl"]
+
+[ext_resource type="PackedScene" uid="uid://bsofscoyhgn5v" path="res://Scenes/Instances/Entities/Player.tscn" id="1_v2c41"]
+[ext_resource type="Script" uid="uid://dks7mv07ips3s" path="res://Codes/Uniques/Menus/CharacterMoves.gd" id="1_y4ur1"]
+[ext_resource type="PackedScene" uid="uid://ctdvdqjmsnxed" path="res://Scenes/Uniques/Maps/Training.tscn" id="2_kgwg2"]
+[ext_resource type="Script" uid="uid://b2pj03jgr2yab" path="res://addons/platformer_system/InputBox.gd" id="4_l56iq"]
+[ext_resource type="Resource" uid="uid://dv0dx44vklit1" path="res://Ressources/Instances/InputPacks/KeyboardInputPack.tres" id="5_vv45a"]
+[ext_resource type="PackedScene" uid="uid://cdb87e5yo6jvm" path="res://Scenes/Instances/Interfaces/ActionShow.tscn" id="6_n6u78"]
+[ext_resource type="Resource" uid="uid://cl2n13ttv0pc" path="res://Ressources/Instances/InputPacks/PauseButton.tres" id="7_mqlmr"]
+
+[sub_resource type="Animation" id="Animation_jilom"]
+resource_name = "BatHit"
+length = 2.5
+step = 0.05
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationInputs")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.85, 1.05, 2.1, 2.2, 2.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"values": [{
+"args": ["left"],
+"method": &"hold_action"
+}, {
+"args": ["shift"],
+"method": &"hold_action"
+}, {
+"args": ["jump"],
+"method": &"hold_action"
+}, {
+"args": ["jump"],
+"method": &"release_action"
+}, {
+"args": ["parry"],
+"method": &"hold_action"
+}, {
+"args": ["attack"],
+"method": &"hold_action"
+}, {
+"args": [],
+"method": &"release_all_actions"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_5fu7p"]
+resource_name = "DashSlash"
+length = 2.0
+step = 0.05
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationInputs")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.85, 1.05),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"values": [{
+"args": ["right"],
+"method": &"hold_action"
+}, {
+"args": ["shift"],
+"method": &"hold_action"
+}, {
+"args": ["parry"],
+"method": &"hold_action"
+}, {
+"args": ["attack"],
+"method": &"hold_action"
+}, {
+"args": [],
+"method": &"release_all_actions"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_t1ns2"]
+resource_name = "Edge"
+length = 2.5
+step = 0.05
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationInputs")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.85, 1.05, 2.2, 2.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"values": [{
+"args": ["left"],
+"method": &"hold_action"
+}, {
+"args": ["shift"],
+"method": &"hold_action"
+}, {
+"args": ["jump"],
+"method": &"hold_action"
+}, {
+"args": ["jump"],
+"method": &"release_action"
+}, {
+"args": ["jump"],
+"method": &"hold_action"
+}, {
+"args": [],
+"method": &"release_all_actions"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_ot1vg"]
+resource_name = "Hammer"
+length = 5.0
+step = 0.05
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationInputs")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.3, 1.1, 1.15, 1.2, 1.25, 2, 2.7, 3.5, 3.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"values": [{
+"args": ["parry"],
+"method": &"hold_action"
+}, {
+"args": ["attack"],
+"method": &"hold_action"
+}, {
+"args": ["attack"],
+"method": &"release_action"
+}, {
+"args": ["right"],
+"method": &"hold_action"
+}, {
+"args": ["shift"],
+"method": &"hold_action"
+}, {
+"args": [],
+"method": &"release_all_actions"
+}, {
+"args": ["parry"],
+"method": &"hold_action"
+}, {
+"args": ["attack"],
+"method": &"hold_action"
+}, {
+"args": [],
+"method": &"release_all_actions"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_mjd7m"]
+resource_name = "Jump"
+length = 2.0
+step = 0.05
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationInputs")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 1.05, 1.25),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"values": [{
+"args": ["left"],
+"method": &"hold_action"
+}, {
+"args": ["shift"],
+"method": &"hold_action"
+}, {
+"args": ["jump"],
+"method": &"hold_action"
+}, {
+"args": [],
+"method": &"release_all_actions"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_d3or8"]
+resource_name = "Parry"
+length = 2.0
+step = 0.05
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationInputs")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": ["parry"],
+"method": &"hold_action"
+}, {
+"args": [],
+"method": &"release_all_actions"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_4p2lt"]
+resource_name = "StraightPunch"
+length = 2.5
+step = 0.05
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationInputs")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.85, 1.05),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"values": [{
+"args": ["right"],
+"method": &"hold_action"
+}, {
+"args": ["shift"],
+"method": &"hold_action"
+}, {
+"args": ["attack"],
+"method": &"hold_action"
+}, {
+"args": [],
+"method": &"release_all_actions"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_1vid5"]
+resource_name = "Teleport"
+length = 3.5
+step = 0.05
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationInputs")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 1.05, 1.1, 1.15, 1.5, 2.3, 2.4, 2.5, 2.55, 2.95, 3, 3.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"values": [{
+"args": ["left"],
+"method": &"hold_action"
+}, {
+"args": ["shift"],
+"method": &"hold_action"
+}, {
+"args": ["jump"],
+"method": &"hold_action"
+}, {
+"args": ["parry"],
+"method": &"hold_action"
+}, {
+"args": ["attack"],
+"method": &"hold_action"
+}, {
+"args": [],
+"method": &"release_all_actions"
+}, {
+"args": ["jump"],
+"method": &"hold_action"
+}, {
+"args": ["parry"],
+"method": &"hold_action"
+}, {
+"args": ["attack"],
+"method": &"hold_action"
+}, {
+"args": ["attack"],
+"method": &"release_action"
+}, {
+"args": ["left"],
+"method": &"hold_action"
+}, {
+"args": ["attack"],
+"method": &"hold_action"
+}, {
+"args": [],
+"method": &"release_all_actions"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_qs5dv"]
+resource_name = "Throw"
+length = 2.0
+step = 0.05
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationInputs")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.05, 1.25, 1.45),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"values": [{
+"args": ["right"],
+"method": &"hold_action"
+}, {
+"args": ["parry"],
+"method": &"hold_action"
+}, {
+"args": ["attack"],
+"method": &"hold_action"
+}, {
+"args": [],
+"method": &"release_all_actions"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_x6sl1"]
+resource_name = "WalkKick"
+length = 2.5
+step = 0.05
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationInputs")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.4, 1.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"values": [{
+"args": ["right"],
+"method": &"hold_action"
+}, {
+"args": ["attack"],
+"method": &"hold_action"
+}, {
+"args": [],
+"method": &"release_all_actions"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0lsqy"]
+_data = {
+&"BatHit": SubResource("Animation_jilom"),
+&"DashSlash": SubResource("Animation_5fu7p"),
+&"Edge": SubResource("Animation_t1ns2"),
+&"Hammer": SubResource("Animation_ot1vg"),
+&"Jump": SubResource("Animation_mjd7m"),
+&"Parry": SubResource("Animation_d3or8"),
+&"StraightPunch": SubResource("Animation_4p2lt"),
+&"Teleport": SubResource("Animation_1vid5"),
+&"Throw": SubResource("Animation_qs5dv"),
+&"WalkKick": SubResource("Animation_x6sl1")
+}
+
+[node name="CharacterMoves" type="Node2D" node_paths=PackedStringArray("player", "camera", "ui_inputs")]
+script = ExtResource("1_y4ur1")
+player = NodePath("Container/Viewport/Player")
+camera = NodePath("Container/Viewport/Camera")
+ui_inputs = NodePath("UI_Input")
+
+[node name="UI_Input" type="Node" parent="."]
+script = ExtResource("4_l56iq")
+input_pack = ExtResource("5_vv45a")
+
+[node name="Container" type="SubViewportContainer" parent="."]
+texture_filter = 3
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(2, 2)
+
+[node name="Viewport" type="SubViewport" parent="Container"]
+handle_input_locally = false
+size = Vector2i(480, 270)
+render_target_update_mode = 4
+
+[node name="Player" parent="Container/Viewport" node_paths=PackedStringArray("world", "camera", "input_box") instance=ExtResource("1_v2c41")]
+position = Vector2(24, -32)
+world = NodePath("../Training")
+camera = NodePath("../Camera")
+input_pack = ExtResource("5_vv45a")
+input_box = NodePath("../../../AnimationInputs")
+
+[node name="Training" parent="Container/Viewport" instance=ExtResource("2_kgwg2")]
+
+[node name="Camera" type="Camera2D" parent="Container/Viewport"]
+
+[node name="AnimationInputs" type="Node" parent="."]
+script = ExtResource("4_l56iq")
+input_pack = ExtResource("5_vv45a")
+user_inputs = false
+
+[node name="Animations" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_0lsqy")
+}
+
+[node name="Actions" type="Node2D" parent="."]
+
+[node name="Parry" parent="Actions" instance=ExtResource("6_n6u78")]
+visible = false
+action_name = "Parry"
+
+[node name="Hammer" parent="Actions" instance=ExtResource("6_n6u78")]
+visible = false
+action_name = "Hammer Dive"
+
+[node name="Jump" parent="Actions" instance=ExtResource("6_n6u78")]
+visible = false
+action_name = "Jump"
+
+[node name="Edge" parent="Actions" instance=ExtResource("6_n6u78")]
+visible = false
+action_name = "Edge Grab"
+
+[node name="BatHit" parent="Actions" instance=ExtResource("6_n6u78")]
+visible = false
+action_name = "Bat Jump"
+
+[node name="Teleport" parent="Actions" instance=ExtResource("6_n6u78")]
+visible = false
+action_name = "Teleportation"
+
+[node name="WalkKick" parent="Actions" instance=ExtResource("6_n6u78")]
+visible = false
+action_name = "High kick"
+
+[node name="Throw" parent="Actions" instance=ExtResource("6_n6u78")]
+visible = false
+action_name = "Lance throw"
+
+[node name="StraightPunch" parent="Actions" instance=ExtResource("6_n6u78")]
+visible = false
+action_name = "Punch"
+
+[node name="DashSlash" parent="Actions" instance=ExtResource("6_n6u78")]
+visible = false
+action_name = "Bloody Slash"
+
+[node name="InputBox" type="Node" parent="."]
+script = ExtResource("4_l56iq")
+input_pack = ExtResource("7_mqlmr")
+
+[connection signal="action_just_pressed" from="UI_Input" to="." method="_on_ui_input_action_just_pressed"]
+[connection signal="action_just_pressed" from="InputBox" to="." method="_on_input_box_action_just_pressed"]

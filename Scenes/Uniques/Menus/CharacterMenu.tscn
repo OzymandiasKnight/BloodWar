@@ -1,9 +1,212 @@
-[gd_scene load_steps=5 format=3 uid="uid://cpk6n1xsmbstk"]
+[gd_scene load_steps=16 format=3 uid="uid://cpk6n1xsmbstk"]
 
-[ext_resource type="Script" path="res://Codes/Uniques/Menus/CharacterMenu.gd" id="1_8htx2"]
+[ext_resource type="Script" uid="uid://grygglm75e3j" path="res://Codes/Uniques/Menus/CharacterMenu.gd" id="1_8htx2"]
 [ext_resource type="PackedScene" uid="uid://cvpuef5avh2rm" path="res://Scenes/Instances/Interfaces/PlayerSelection.tscn" id="2_da7l4"]
 [ext_resource type="Resource" uid="uid://dv0dx44vklit1" path="res://Ressources/Instances/InputPacks/KeyboardInputPack.tres" id="4_723w8"]
+[ext_resource type="Resource" uid="uid://gr3ugu5d38au" path="res://Ressources/Instances/InputPacks/KeyboardSecondInputPack.tres" id="4_u6eh7"]
+[ext_resource type="Resource" uid="uid://df0ct5658jolr" path="res://Ressources/Instances/InputPacks/KeyboardThirdInputPack.tres" id="5_ma3jv"]
+[ext_resource type="Script" uid="uid://b2pj03jgr2yab" path="res://addons/platformer_system/InputBox.gd" id="6_jp2lq"]
 [ext_resource type="PackedScene" uid="uid://c06c7ftn8l5lx" path="res://Scenes/Instances/Interfaces/JoypadIcon.tscn" id="6_y17ia"]
+[ext_resource type="Resource" uid="uid://cl2n13ttv0pc" path="res://Ressources/Instances/InputPacks/PauseButton.tres" id="7_ppfdp"]
+[ext_resource type="Texture2D" uid="uid://gom164bg1xk5" path="res://Textures/Instances/Interfaces/Icons/KeyBoardKeyFrames.tres" id="9_4i7yq"]
+[ext_resource type="LabelSettings" uid="uid://hfcxv7q3cbv7" path="res://Ressources/Uniques/Themes/OutlineText.tres" id="12_a0xn6"]
+[ext_resource type="Texture2D" uid="uid://cnxwr8d7mxvsh" path="res://Textures/Instances/Interfaces/Icons/L2Frames.tres" id="13_px184"]
+[ext_resource type="Texture2D" uid="uid://dbwrd01oey0l3" path="res://Textures/Instances/Interfaces/Icons/R2Frames.tres" id="14_5y4qv"]
+
+[sub_resource type="Animation" id="Animation_dr0mh"]
+resource_name = "Loop"
+length = 0.5
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Keyboards/Keyboard/Attack:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Keyboards/Keyboard/Parry:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("L2:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("L3:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Keyboards/Keyboard2/Parry:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Keyboards/Keyboard2/Attack:frame")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Keyboards/Keyboard3/Parry:frame")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Keyboards/Keyboard3/Attack:frame")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+
+[sub_resource type="Animation" id="Animation_x150g"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Keyboards/Keyboard/Attack:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("L2:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("L3:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Keyboards/Keyboard/Parry:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Keyboards/Keyboard2/Parry:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Keyboards/Keyboard2/Attack:frame")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Keyboards/Keyboard3/Attack:frame")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_i8rv5"]
+_data = {
+&"Loop": SubResource("Animation_dr0mh"),
+&"RESET": SubResource("Animation_x150g")
+}
 
 [node name="CharacterMenu" type="CanvasLayer"]
 script = ExtResource("1_8htx2")
@@ -19,6 +222,16 @@ offset_right = 480.0
 offset_bottom = 270.0
 mouse_filter = 1
 
+[node name="ColorRect" type="ColorRect" parent="Window"]
+z_index = -1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0196078, 0.129412, 0.215686, 1)
+
 [node name="Players" type="HBoxContainer" parent="Window"]
 custom_minimum_size = Vector2(400, 135)
 layout_mode = 1
@@ -33,33 +246,45 @@ grow_vertical = 2
 alignment = 1
 
 [node name="Keyboard" parent="Window/Players" instance=ExtResource("2_da7l4")]
+visible = false
 layout_mode = 2
 input_pack = ExtResource("4_723w8")
 
+[node name="Keyboard2" parent="Window/Players" instance=ExtResource("2_da7l4")]
+visible = false
+layout_mode = 2
+input_pack = ExtResource("4_u6eh7")
+
+[node name="Keyboard3" parent="Window/Players" instance=ExtResource("2_da7l4")]
+visible = false
+layout_mode = 2
+input_pack = ExtResource("5_ma3jv")
+
 [node name="Controller1" parent="Window/Players" instance=ExtResource("2_da7l4")]
+visible = false
 layout_mode = 2
 controller_id = 0
 
 [node name="Controller2" parent="Window/Players" instance=ExtResource("2_da7l4")]
+visible = false
 layout_mode = 2
 controller_id = 1
 
-[node name="Button" type="Button" parent="Window"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.1
-anchor_right = 0.1
-offset_left = -36.0
-offset_top = 13.0
-offset_right = 81.0
-offset_bottom = 53.0
-text = "Quit"
+[node name="Controller3" parent="Window/Players" instance=ExtResource("2_da7l4")]
+visible = false
+layout_mode = 2
+controller_id = 2
+
+[node name="Controller4" parent="Window/Players" instance=ExtResource("2_da7l4")]
+visible = false
+layout_mode = 2
+controller_id = 3
 
 [node name="Joypads" type="HBoxContainer" parent="Window"]
 custom_minimum_size = Vector2(108, 27)
 layout_mode = 0
-offset_left = 372.0
-offset_right = 480.0
+offset_left = 370.0
+offset_right = 478.0
 offset_bottom = 27.0
 
 [node name="JoypadIcon" parent="Window/Joypads" instance=ExtResource("6_y17ia")]
@@ -86,4 +311,142 @@ handle_input_locally = false
 size = Vector2i(480, 270)
 render_target_update_mode = 0
 
-[connection signal="pressed" from="Window/Button" to="." method="_on_button_pressed"]
+[node name="InputBox2" type="Node" parent="."]
+script = ExtResource("6_jp2lq")
+input_pack = ExtResource("7_ppfdp")
+
+[node name="Ready" type="Node2D" parent="."]
+texture_filter = 3
+position = Vector2(772, 64)
+scale = Vector2(2, 2)
+
+[node name="Ready" type="Label" parent="Ready"]
+offset_left = 6.0
+offset_right = 90.0
+offset_bottom = 23.0
+text = "Ready :"
+label_settings = ExtResource("12_a0xn6")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Animation" type="AnimationPlayer" parent="Ready"]
+libraries = {
+&"": SubResource("AnimationLibrary_i8rv5")
+}
+autoplay = "Loop"
+
+[node name="L2" type="Sprite2D" parent="Ready"]
+visible = false
+position = Vector2(34.5, 31)
+texture = ExtResource("13_px184")
+vframes = 2
+
+[node name="L3" type="Sprite2D" parent="Ready"]
+visible = false
+position = Vector2(63.5, 31)
+texture = ExtResource("14_5y4qv")
+vframes = 2
+
+[node name="Keyboards" type="VBoxContainer" parent="Ready"]
+offset_left = 21.0
+offset_top = 38.0
+offset_right = 78.0
+offset_bottom = 103.0
+
+[node name="Keyboard" type="Control" parent="Ready/Keyboards"]
+visible = false
+custom_minimum_size = Vector2(0, 27)
+layout_mode = 2
+
+[node name="Parry" type="Sprite2D" parent="Ready/Keyboards/Keyboard"]
+texture = ExtResource("9_4i7yq")
+centered = false
+vframes = 2
+
+[node name="Key" type="Label" parent="Ready/Keyboards/Keyboard/Parry"]
+offset_right = 27.0
+offset_bottom = 27.0
+text = "A/Q"
+label_settings = ExtResource("12_a0xn6")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Attack" type="Sprite2D" parent="Ready/Keyboards/Keyboard"]
+position = Vector2(29, 0)
+texture = ExtResource("9_4i7yq")
+centered = false
+vframes = 2
+
+[node name="Key" type="Label" parent="Ready/Keyboards/Keyboard/Attack"]
+offset_right = 27.0
+offset_bottom = 27.0
+text = "E"
+label_settings = ExtResource("12_a0xn6")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Keyboard2" type="Control" parent="Ready/Keyboards"]
+visible = false
+custom_minimum_size = Vector2(0, 27)
+layout_mode = 2
+
+[node name="Parry" type="Sprite2D" parent="Ready/Keyboards/Keyboard2"]
+texture = ExtResource("9_4i7yq")
+centered = false
+vframes = 2
+
+[node name="Key" type="Label" parent="Ready/Keyboards/Keyboard2/Parry"]
+offset_right = 27.0
+offset_bottom = 27.0
+text = "U"
+label_settings = ExtResource("12_a0xn6")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Attack" type="Sprite2D" parent="Ready/Keyboards/Keyboard2"]
+position = Vector2(29, 0)
+texture = ExtResource("9_4i7yq")
+centered = false
+vframes = 2
+
+[node name="Key" type="Label" parent="Ready/Keyboards/Keyboard2/Attack"]
+offset_right = 27.0
+offset_bottom = 27.0
+text = "O"
+label_settings = ExtResource("12_a0xn6")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Keyboard3" type="Control" parent="Ready/Keyboards"]
+visible = false
+custom_minimum_size = Vector2(0, 27)
+layout_mode = 2
+
+[node name="Parry" type="Sprite2D" parent="Ready/Keyboards/Keyboard3"]
+texture = ExtResource("9_4i7yq")
+centered = false
+vframes = 2
+
+[node name="Key" type="Label" parent="Ready/Keyboards/Keyboard3/Parry"]
+offset_right = 27.0
+offset_bottom = 27.0
+text = "7"
+label_settings = ExtResource("12_a0xn6")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Attack" type="Sprite2D" parent="Ready/Keyboards/Keyboard3"]
+position = Vector2(29, 0)
+texture = ExtResource("9_4i7yq")
+centered = false
+vframes = 2
+
+[node name="Key" type="Label" parent="Ready/Keyboards/Keyboard3/Attack"]
+offset_right = 27.0
+offset_bottom = 27.0
+text = "9"
+label_settings = ExtResource("12_a0xn6")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="action_just_pressed" from="InputBox2" to="." method="_on_input_box_2_action_just_pressed"]

@@ -1,0 +1,95 @@
+[gd_scene load_steps=7 format=3 uid="uid://c2mvjfwyq06cn"]
+
+[ext_resource type="Texture2D" uid="uid://b6o6mkhq6gb58" path="res://Textures/Instances/Interfaces/Controller.png" id="1_5l7ox"]
+[ext_resource type="Script" uid="uid://b8v25y7ms6k65" path="res://Codes/Uniques/Menus/KeyMenu.gd" id="1_v1eau"]
+[ext_resource type="Texture2D" uid="uid://buyfpfc1cs27n" path="res://Textures/Instances/Interfaces/ControllerButtons.png" id="2_tirsy"]
+[ext_resource type="Script" uid="uid://b2pj03jgr2yab" path="res://addons/platformer_system/InputBox.gd" id="4_udnny"]
+[ext_resource type="Resource" uid="uid://bd4lamfm28haq" path="res://Ressources/Instances/InputPacks/ControllerInputPack.tres" id="5_imnho"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jqpjs"]
+atlas = ExtResource("2_tirsy")
+region = Rect2(0, 0, 24, 24)
+
+[node name="KeyMenu" type="CanvasLayer"]
+script = ExtResource("1_v1eau")
+
+[node name="Window" type="Control" parent="."]
+custom_minimum_size = Vector2(480, 270)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 480.0
+offset_bottom = 270.0
+
+[node name="Background" type="ColorRect" parent="Window"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0823529, 0.235294, 0.290196, 1)
+
+[node name="Gamepad" type="Node2D" parent="Window"]
+texture_filter = 3
+position = Vector2(352, 123)
+
+[node name="Left" type="Sprite2D" parent="Window/Gamepad"]
+position = Vector2(-48, 0)
+texture = ExtResource("1_5l7ox")
+
+[node name="Trigger" type="Sprite2D" parent="Window/Gamepad/Left"]
+position = Vector2(12, -41)
+texture = SubResource("AtlasTexture_jqpjs")
+
+[node name="Joystick" type="Sprite2D" parent="Window/Gamepad/Left"]
+position = Vector2(24, 8)
+texture = ExtResource("2_tirsy")
+hframes = 2
+frame = 1
+
+[node name="Right" type="Sprite2D" parent="Window/Gamepad"]
+position = Vector2(48, 0)
+scale = Vector2(-1, 1)
+texture = ExtResource("1_5l7ox")
+
+[node name="Trigger" type="Sprite2D" parent="Window/Gamepad/Right"]
+position = Vector2(12, -41)
+texture = SubResource("AtlasTexture_jqpjs")
+
+[node name="Joystick" type="Sprite2D" parent="Window/Gamepad/Right"]
+position = Vector2(24, 8)
+texture = ExtResource("2_tirsy")
+hframes = 2
+frame = 1
+
+[node name="InputBox" type="Node" parent="Window"]
+script = ExtResource("4_udnny")
+input_pack = ExtResource("5_imnho")
+
+[node name="Label" type="Label" parent="Window"]
+layout_mode = 0
+offset_left = 304.0
+offset_top = 33.0
+offset_right = 379.0
+offset_bottom = 56.0
+text = "50"
+
+[node name="Container" type="SubViewportContainer" parent="."]
+visible = false
+texture_filter = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -480.0
+offset_bottom = -270.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2, 2)
+
+[node name="Viewport" type="SubViewport" parent="Container"]
+handle_input_locally = false
+size = Vector2i(480, 270)
+render_target_update_mode = 0
+
+[node name="Camera" type="Camera2D" parent="."]
+position = Vector2(480, 270)

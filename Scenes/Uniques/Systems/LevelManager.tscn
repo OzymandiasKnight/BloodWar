@@ -1,10 +1,12 @@
-[gd_scene load_steps=9 format=3 uid="uid://ji0y1ygsy1eo"]
+[gd_scene load_steps=11 format=3 uid="uid://ji0y1ygsy1eo"]
 
-[ext_resource type="Script" path="res://Codes/Uniques/Systems/LevelManager.gd" id="1_t4rih"]
+[ext_resource type="Script" uid="uid://ej1tfvettrbq" path="res://Codes/Uniques/Systems/LevelManager.gd" id="1_t4rih"]
+[ext_resource type="Material" uid="uid://bq72ogwfnksjg" path="res://Ressources/Uniques/Shaders/BlueSky.tres" id="2_yamqu"]
 [ext_resource type="Texture2D" uid="uid://65d5pf87ap4v" path="res://Textures/Instances/Interfaces/Pause.png" id="3_8aor3"]
-[ext_resource type="Script" path="res://addons/platformer_system/InputBox.gd" id="3_klsa7"]
+[ext_resource type="Script" uid="uid://b2pj03jgr2yab" path="res://addons/platformer_system/InputBox.gd" id="3_klsa7"]
 [ext_resource type="Resource" uid="uid://584wspji34c8" path="res://Ressources/Instances/InputPacks/LevelManager.tres" id="4_eatuc"]
-[ext_resource type="PackedScene" uid="uid://bda283e0xnl5n" path="res://Scenes/Uniques/Maps/TheEnd.tscn" id="5_f7oxg"]
+[ext_resource type="PackedScene" uid="uid://dpretqcbnw1mm" path="res://Scenes/Uniques/Maps/City.tscn" id="5_0gkpw"]
+[ext_resource type="LabelSettings" uid="uid://hfcxv7q3cbv7" path="res://Ressources/Uniques/Themes/OutlineText.tres" id="7_yakb3"]
 
 [sub_resource type="Animation" id="Animation_y3qui"]
 resource_name = "Pause"
@@ -40,8 +42,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_3lpde"]
 _data = {
-"Pause": SubResource("Animation_y3qui"),
-"RESET": SubResource("Animation_8fd2d")
+&"Pause": SubResource("Animation_y3qui"),
+&"RESET": SubResource("Animation_8fd2d")
 }
 
 [node name="LevelManager" type="Control" node_paths=PackedStringArray("inputs", "level")]
@@ -53,7 +55,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_t4rih")
 inputs = NodePath("Inputs")
-level = NodePath("TheEnd")
+level = NodePath("City")
 rounds = 5
 
 [node name="Screens" type="Control" parent="."]
@@ -67,6 +69,7 @@ grow_vertical = 2
 
 [node name="Fill" type="ColorRect" parent="."]
 z_index = -2
+material = ExtResource("2_yamqu")
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -98,10 +101,24 @@ input_pack = ExtResource("4_eatuc")
 [node name="Animations" type="AnimationPlayer" parent="."]
 process_mode = 3
 libraries = {
-"": SubResource("AnimationLibrary_3lpde")
+&"": SubResource("AnimationLibrary_3lpde")
 }
 
-[node name="TheEnd" parent="." instance=ExtResource("5_f7oxg")]
+[node name="City" parent="." instance=ExtResource("5_0gkpw")]
+
+[node name="Round" type="Label" parent="."]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -50.0
+offset_right = 50.0
+offset_bottom = 23.0
+text = "0/7"
+label_settings = ExtResource("7_yakb3")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [connection signal="action_frames_maxed" from="Inputs" to="." method="_on_inputs_action_frames_maxed"]
 [connection signal="action_just_pressed" from="Inputs" to="." method="_on_inputs_action_just_pressed"]

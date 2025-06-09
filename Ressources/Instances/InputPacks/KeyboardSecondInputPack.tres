@@ -1,0 +1,56 @@
+[gd_resource type="Resource" script_class="InputPack" load_steps=9 format=3 uid="uid://gr3ugu5d38au"]
+
+[ext_resource type="Script" uid="uid://d33ysyymtchi6" path="res://addons/platformer_system/InputAction.gd" id="1_nmbo4"]
+[ext_resource type="Script" uid="uid://d1qhgwfov56qy" path="res://addons/platformer_system/InputPack.gd" id="2_tsfkc"]
+
+[sub_resource type="Resource" id="Resource_s4dlr"]
+script = ExtResource("1_nmbo4")
+input = "leftk2"
+action = "left"
+max_frames = 0
+joypad_trigger = false
+instant_release = true
+
+[sub_resource type="Resource" id="Resource_2n7lm"]
+script = ExtResource("1_nmbo4")
+input = "rightk2"
+action = "right"
+max_frames = 0
+joypad_trigger = false
+instant_release = true
+
+[sub_resource type="Resource" id="Resource_spbl8"]
+script = ExtResource("1_nmbo4")
+input = "lightk2"
+action = "shift"
+max_frames = 0
+joypad_trigger = false
+instant_release = true
+
+[sub_resource type="Resource" id="Resource_xyvsy"]
+script = ExtResource("1_nmbo4")
+input = "attackk2"
+action = "attack"
+max_frames = 0
+joypad_trigger = false
+instant_release = true
+
+[sub_resource type="Resource" id="Resource_yklww"]
+script = ExtResource("1_nmbo4")
+input = "parryk2"
+action = "parry"
+max_frames = 60
+joypad_trigger = false
+instant_release = true
+
+[sub_resource type="Resource" id="Resource_77xc4"]
+script = ExtResource("1_nmbo4")
+input = "upk2"
+action = "jump"
+max_frames = 0
+joypad_trigger = false
+instant_release = true
+
+[resource]
+script = ExtResource("2_tsfkc")
+inputs = Array[ExtResource("1_nmbo4")]([SubResource("Resource_s4dlr"), SubResource("Resource_2n7lm"), SubResource("Resource_spbl8"), SubResource("Resource_xyvsy"), SubResource("Resource_yklww"), SubResource("Resource_77xc4")])

@@ -1,10 +1,11 @@
 [gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://cnwiycabm80ry"]
 
-[ext_resource type="Shader" path="res://Ressources/Uniques/Shaders/ColorSwap.gdshader" id="1_mwdqk"]
+[ext_resource type="Shader" uid="uid://cnwgql703tf0n" path="res://Ressources/Uniques/Shaders/ColorSwap.gdshader" id="1_mwdqk"]
 
 [resource]
 resource_local_to_scene = true
 shader = ExtResource("1_mwdqk")
+shader_parameter/brightness = 0.8
 shader_parameter/replace_p_color = Color(0.0745098, 0.133333, 0.262745, 1)
 shader_parameter/replace_s_color = Color(0.101961, 0.27451, 0.419608, 1)
 shader_parameter/replace_t_color = Color(0.0627451, 0.564706, 0.556863, 1)

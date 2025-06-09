@@ -18,7 +18,6 @@ func Ready():
 
 func Enter(state):
 	previous_state = state
-	print(state.name)
 	if state.name == "Teleport":
 		set_graced()
 

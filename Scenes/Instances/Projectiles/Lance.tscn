@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=3 uid="uid://dlmx0hnjoh3ew"]
 
-[ext_resource type="Script" path="res://Codes/Instances/Classes/Projectile.gd" id="1_vb855"]
-[ext_resource type="Script" path="res://addons/fight_system/HitBox.gd" id="2_6ro0y"]
+[ext_resource type="Script" uid="uid://c8n17nefogn2k" path="res://Codes/Instances/Classes/Projectile.gd" id="1_vb855"]
+[ext_resource type="Script" uid="uid://dgq0fl0a7p6fa" path="res://addons/fight_system/HitBox.gd" id="2_6ro0y"]
 [ext_resource type="Texture2D" uid="uid://0jh6oi1yoaq8" path="res://Textures/Instances/Props/Projectiles.png" id="3_s5yhl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_stvfm"]
@@ -66,8 +66,8 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_mxy25"]
 _data = {
-"Deploy": SubResource("Animation_frff4"),
-"Destroy": SubResource("Animation_ub0va")
+&"Deploy": SubResource("Animation_frff4"),
+&"Destroy": SubResource("Animation_ub0va")
 }
 
 [node name="Lance" type="CharacterBody2D" node_paths=PackedStringArray("hitbox", "terrain_box")]

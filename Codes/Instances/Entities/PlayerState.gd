@@ -5,6 +5,7 @@ class_name PlayerState
 @export var can_jump:bool
 @export var entry_animation:String
 
+@export var possible_inputs:Array[InputIcon]
 
 var player:Player = null
 
@@ -25,4 +26,7 @@ func Exit(_new_state:String):
 	pass
 
 func apply_gravity(scale:float=1.0):
-	player.vel_gra.y += player.stat_weight
+	if not player.is_on_ground():
+		player.vel_gra.y += player.stat_weight*scale
+	else:
+		player.vel_gra.y = 0

@@ -3,8 +3,12 @@ extends PlayerState
 func Enter(_state):
 	pass
 
+
 func PhysicsProcess(_delta:float):
 	if player.is_on_ground():
-		player.vel_mov = Vector2(0,0)
-		player.vel_gra = Vector2(0,0)
-		
+		player.reset_velocities()
+	else:
+		apply_gravity()
+
+func Exit(_new_state):
+	player.hurtbox.get_node("Collision").set_deferred("disabled",true)

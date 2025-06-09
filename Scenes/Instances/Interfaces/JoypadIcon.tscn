@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://c06c7ftn8l5lx"]
 
 [ext_resource type="Texture2D" uid="uid://babypq53ayxqm" path="res://Textures/Instances/Interfaces/UserIcons.png" id="1_52o2p"]
-[ext_resource type="Script" path="res://Codes/Instances/Interfaces/JoypadIcon.gd" id="1_60o78"]
+[ext_resource type="Script" uid="uid://btssyuhvtcbl3" path="res://Codes/Instances/Interfaces/JoypadIcon.gd" id="1_60o78"]
 
 [sub_resource type="Animation" id="Animation_2mnw3"]
 resource_name = "Connect"
@@ -56,8 +56,8 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_defyr"]
 _data = {
-"Connect": SubResource("Animation_2mnw3"),
-"RESET": SubResource("Animation_3mfpi")
+&"Connect": SubResource("Animation_2mnw3"),
+&"RESET": SubResource("Animation_3mfpi")
 }
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_iqof2"]

@@ -1,0 +1,7 @@
+[gd_resource type="SystemFont" load_steps=2 format=3 uid="uid://dln0qefju5j2b"]
+
+[ext_resource type="FontFile" uid="uid://ctmt3ssrl6vp4" path="res://Ressources/Uniques/Themes/rainyhearts.ttf" id="1_bam0p"]
+
+[resource]
+fallbacks = Array[Font]([ExtResource("1_bam0p")])
+font_names = PackedStringArray("rainyhearts")

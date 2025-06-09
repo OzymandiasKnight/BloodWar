@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://dp0j77j6sh0p5"]
+
+[ext_resource type="Texture2D" uid="uid://b5y6i0o31p76l" path="res://Textures/Instances/Interfaces/Icons/DeathIcon.tres" id="1_st7kn"]
+
+[node name="Icon" type="Control"]
+texture_filter = 3
+custom_minimum_size = Vector2(13, 13)
+layout_mode = 3
+anchors_preset = 0
+
+[node name="Texture" type="Sprite2D" parent="."]
+position = Vector2(1, 1)
+texture = ExtResource("1_st7kn")
+centered = false

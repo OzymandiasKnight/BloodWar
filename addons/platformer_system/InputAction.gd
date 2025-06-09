@@ -8,4 +8,6 @@ class_name InputAction
 ##Max frames this key can attain when hold
 @export var max_frames:int = 0
 
+@export var joypad_trigger:bool = false
+
 @export var instant_release:bool = true

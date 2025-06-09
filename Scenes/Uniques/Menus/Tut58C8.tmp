@@ -1,0 +1,129 @@
+[gd_scene load_steps=11 format=3 uid="uid://d1bruka5uo2rd"]
+
+[ext_resource type="PackedScene" uid="uid://bsofscoyhgn5v" path="res://Scenes/Instances/Entities/Player.tscn" id="1_a4f2u"]
+[ext_resource type="Script" path="res://Codes/Uniques/Menus/TutorialMenu.gd" id="1_jrfmr"]
+[ext_resource type="Resource" uid="uid://dv0dx44vklit1" path="res://Ressources/Instances/InputPacks/KeyboardInputPack.tres" id="2_h15lt"]
+[ext_resource type="PackedScene" uid="uid://bc00j5gx7droq" path="res://Scenes/Uniques/Maps/Tutorial.tscn" id="3_540ik"]
+[ext_resource type="Script" path="res://addons/platformer_system/InputBox.gd" id="5_l5g5p"]
+[ext_resource type="LabelSettings" uid="uid://hfcxv7q3cbv7" path="res://Ressources/Uniques/Themes/OutlineText.tres" id="5_rll11"]
+[ext_resource type="Resource" uid="uid://ma0itpjnu7gx" path="res://Ressources/Instances/InputPacks/DefaultInputPack.tres" id="6_d7o7e"]
+
+[sub_resource type="Animation" id="Animation_uwenn"]
+resource_name = "GoBack"
+step = 0.1
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": ["right"],
+"method": &"hold_action"
+}, {
+"args": [],
+"method": &"release_all_actions"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_rn4et"]
+resource_name = "Kick"
+length = 1.5
+loop_mode = 1
+step = 0.1
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.7, 1.1, 1.2, 1.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"values": [{
+"args": ["left"],
+"method": &"hold_action"
+}, {
+"args": ["attack"],
+"method": &"hold_action"
+}, {
+"args": [],
+"method": &"release_all_actions"
+}, {
+"args": ["right"],
+"method": &"hold_action"
+}, {
+"args": ["left"],
+"method": &"hold_action"
+}, {
+"args": ["right"],
+"method": &"release_action"
+}, {
+"args": [],
+"method": &"release_all_actions"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_f5nlj"]
+_data = {
+"GoBack": SubResource("Animation_uwenn"),
+"Kick": SubResource("Animation_rn4et")
+}
+
+[node name="TutorialMenu" type="Node2D" node_paths=PackedStringArray("player", "camera")]
+script = ExtResource("1_jrfmr")
+player = NodePath("Container/Viewport/Player")
+camera = NodePath("Container/Viewport/Camera")
+
+[node name="Container" type="SubViewportContainer" parent="."]
+texture_filter = 3
+offset_right = 480.0
+offset_bottom = 270.0
+scale = Vector2(2, 2)
+
+[node name="Viewport" type="SubViewport" parent="Container"]
+handle_input_locally = false
+size = Vector2i(480, 270)
+render_target_update_mode = 4
+
+[node name="Player" parent="Container/Viewport" node_paths=PackedStringArray("world", "camera") instance=ExtResource("1_a4f2u")]
+position = Vector2(24, -32)
+world = NodePath("../Tutorial")
+camera = NodePath("../Camera")
+input_pack = ExtResource("2_h15lt")
+stat_stiffness = 50
+
+[node name="Camera" type="Camera2D" parent="Container/Viewport"]
+
+[node name="Tutorial" parent="Container/Viewport" instance=ExtResource("3_540ik")]
+
+[node name="DefenceBot" parent="Container/Viewport" node_paths=PackedStringArray("input_box") instance=ExtResource("1_a4f2u")]
+position = Vector2(516, -120)
+input_pack = ExtResource("6_d7o7e")
+input_box = NodePath("AnimationBox")
+stat_stiffness = 100
+
+[node name="AnimationBox" type="Node" parent="Container/Viewport/DefenceBot"]
+script = ExtResource("5_l5g5p")
+
+[node name="Animation" type="AnimationPlayer" parent="Container/Viewport/DefenceBot/AnimationBox"]
+libraries = {
+"": SubResource("AnimationLibrary_f5nlj")
+}
+autoplay = "Kick"
+next/GoBack = &"Kick"
+
+[node name="Message" type="Label" parent="."]
+texture_filter = 3
+offset_right = 480.0
+offset_bottom = 30.0
+scale = Vector2(2, 2)
+text = "Walk to the Bridge"
+label_settings = ExtResource("5_rll11")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="player_die" from="Container/Viewport/Tutorial" to="." method="_on_tutorial_player_die"]

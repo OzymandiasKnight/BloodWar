@@ -1,5 +1,8 @@
-[gd_resource type="LabelSettings" format=3 uid="uid://hfcxv7q3cbv7"]
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://hfcxv7q3cbv7"]
+
+[ext_resource type="FontFile" uid="uid://ctmt3ssrl6vp4" path="res://Ressources/Uniques/Themes/rainyhearts.ttf" id="1_mqayu"]
 
 [resource]
+font = ExtResource("1_mqayu")
 outline_size = 2
 outline_color = Color(0, 0, 0, 1)

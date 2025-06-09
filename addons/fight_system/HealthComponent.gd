@@ -31,7 +31,8 @@ func _ready():
 
 func _physics_process(delta):
 	for eff in effects.keys():
-		effects[eff] = max(0.0,effects[eff]-delta)
+		if effects[eff] > 0.0:
+			effects[eff] = max(0.0,effects[eff]-delta)
 		if effects[eff] == 0.0:
 			effects.erase(eff)
 			hurtbox.effect_cleared.emit(eff)

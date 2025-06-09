@@ -1,0 +1,7 @@
+[gd_resource type="AtlasTexture" load_steps=2 format=3 uid="uid://bwlgvryq2h3l0"]
+
+[ext_resource type="Texture2D" uid="uid://c03avwyd1ofnh" path="res://Textures/Uniques/Maps/CityNormals.tres" id="1_alogl"]
+
+[resource]
+atlas = ExtResource("1_alogl")
+region = Rect2(288, 0, 144, 120)

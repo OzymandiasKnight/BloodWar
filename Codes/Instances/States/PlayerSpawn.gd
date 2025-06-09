@@ -12,7 +12,9 @@ func Ready():
 	add_child(timer)
 
 func Enter(_old_state):
+	timer.set_wait_time(ready_time)
 	timer.start()
+	player.hurtbox.get_node("Collision").set_deferred("disabled",false)
 
 func PhysicsProcess(_delta):
 	apply_gravity()

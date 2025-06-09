@@ -1,0 +1,228 @@
+[gd_scene load_steps=17 format=3 uid="uid://by8uloocmfjkk"]
+
+[ext_resource type="Script" path="res://Codes/Instances/Interfaces/PlayerHUD.gd" id="1_uxe18"]
+[ext_resource type="Texture2D" uid="uid://disqrrk4von47" path="res://Textures/Instances/Interfaces/PlayerHUD.png" id="2_8wt5i"]
+[ext_resource type="Texture2D" uid="uid://di6gqhy8vfas5" path="res://Textures/Instances/Interfaces/Slash.png" id="3_83b54"]
+[ext_resource type="LabelSettings" uid="uid://hfcxv7q3cbv7" path="res://Ressources/Uniques/Themes/OutlineText.tres" id="4_r3lpq"]
+[ext_resource type="Texture2D" uid="uid://dka6w7plyjux8" path="res://Textures/Instances/Interfaces/Borders.png" id="5_qnhkx"]
+[ext_resource type="PackedScene" uid="uid://c41ojc1sef3ah" path="res://Scenes/Instances/Interfaces/ActionKeyIndicator.tscn" id="6_fb0cs"]
+[ext_resource type="Script" path="res://addons/platformer_system/Tremor.gd" id="7_rf1rc"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xrg5j"]
+atlas = ExtResource("2_8wt5i")
+region = Rect2(0, 0, 400, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s6ups"]
+atlas = ExtResource("2_8wt5i")
+region = Rect2(0, 40, 400, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fef4a"]
+atlas = ExtResource("2_8wt5i")
+region = Rect2(0, 20, 400, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i20c2"]
+region = Rect2(0, 0, 100, 120)
+
+[sub_resource type="Animation" id="Animation_i26do"]
+resource_name = "Announcement"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Announcement:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lp8d8"]
+_data = {
+"Announcement": SubResource("Animation_i26do")
+}
+
+[sub_resource type="Animation" id="Animation_lb41a"]
+resource_name = "HIT"
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../..")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"values": []
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("..:scale:x")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 1.2, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.1, 0.5)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("..:scale:y")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 1.2, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.1, 0.5)
+}
+
+[sub_resource type="Animation" id="Animation_ybuwe"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_nsh7v"]
+_data = {
+"HIT": SubResource("Animation_lb41a"),
+"RESET": SubResource("Animation_ybuwe")
+}
+
+[node name="HUD" type="Control"]
+texture_filter = 3
+custom_minimum_size = Vector2(480, 270)
+layout_mode = 3
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 1.5
+anchor_bottom = 1.5
+offset_right = -480.0
+offset_bottom = -270.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_uxe18")
+
+[node name="HealthBarBackground" type="Sprite2D" parent="."]
+position = Vector2(240, 256)
+texture = SubResource("AtlasTexture_xrg5j")
+
+[node name="Wounded" type="Sprite2D" parent="HealthBarBackground"]
+visible = false
+texture = SubResource("AtlasTexture_s6ups")
+
+[node name="HealthBar" type="TextureProgressBar" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 40.0
+offset_top = -24.0
+value = 50.0
+texture_progress = SubResource("AtlasTexture_fef4a")
+
+[node name="Announcement" type="Sprite2D" parent="."]
+z_index = 1
+position = Vector2(240, 135)
+texture = ExtResource("3_83b54")
+
+[node name="Text" type="Label" parent="Announcement"]
+modulate = Color(100, 100, 100, 1)
+offset_left = -240.0
+offset_top = -35.0
+offset_right = 240.0
+offset_bottom = 35.0
+text = "FIGHT !"
+label_settings = ExtResource("4_r3lpq")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="Announcement"]
+visible = false
+z_index = -1
+position = Vector2(0, -74)
+texture = SubResource("AtlasTexture_i20c2")
+
+[node name="Shadow" type="Sprite2D" parent="Announcement"]
+modulate = Color(0.501961, 0.501961, 0.501961, 1)
+z_index = -1
+position = Vector2(0, 10)
+texture = ExtResource("3_83b54")
+
+[node name="Borders" type="Sprite2D" parent="."]
+texture = ExtResource("5_qnhkx")
+centered = false
+
+[node name="Animation" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_lp8d8")
+}
+
+[node name="ActionIndicators" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 136.0
+offset_bottom = 41.0
+
+[node name="ActionKeyIndicator" parent="ActionIndicators" instance=ExtResource("6_fb0cs")]
+layout_mode = 2
+
+[node name="ActionKeyIndicator2" parent="ActionIndicators" instance=ExtResource("6_fb0cs")]
+visible = false
+layout_mode = 2
+
+[node name="TremorNode" type="Node2D" parent="."]
+position = Vector2(440, 40)
+script = ExtResource("7_rf1rc")
+strenght = 5.0
+speed = 325.0
+max_tremor = 100.0
+constant_tremor = 1.0
+rotation_tremor = true
+
+[node name="Combo" type="Node2D" parent="TremorNode"]
+modulate = Color(1, 1, 1, 0)
+
+[node name="Band" type="Sprite2D" parent="TremorNode/Combo"]
+
+[node name="Animation" type="AnimationPlayer" parent="TremorNode/Combo"]
+root_node = NodePath("../Band")
+libraries = {
+"": SubResource("AnimationLibrary_nsh7v")
+}
+
+[node name="Number" type="Label" parent="TremorNode/Combo"]
+offset_left = -15.0
+offset_top = -15.0
+offset_right = 15.0
+offset_bottom = 15.0
+text = "5 !"
+label_settings = ExtResource("4_r3lpq")
+horizontal_alignment = 1
+vertical_alignment = 1

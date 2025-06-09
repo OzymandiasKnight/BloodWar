@@ -1,0 +1,46 @@
+[gd_scene load_steps=5 format=3 uid="uid://cdb87e5yo6jvm"]
+
+[ext_resource type="LabelSettings" uid="uid://hfcxv7q3cbv7" path="res://Ressources/Uniques/Themes/OutlineText.tres" id="1_fsi7x"]
+[ext_resource type="Script" uid="uid://b7m1quewbpj2c" path="res://Codes/Instances/Interfaces/ActionShow.gd" id="1_ovoc8"]
+
+[sub_resource type="Animation" id="Animation_sbjld"]
+resource_name = "Select"
+length = 0.15
+step = 0.025
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Offset:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 15), Vector2(15, 15)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6amju"]
+_data = {
+&"Select": SubResource("Animation_sbjld")
+}
+
+[node name="ActionShow" type="Node2D"]
+texture_filter = 3
+script = ExtResource("1_ovoc8")
+
+[node name="Animation" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_6amju")
+}
+
+[node name="Offset" type="Node2D" parent="."]
+position = Vector2(0, 15)
+
+[node name="Text" type="Label" parent="Offset"]
+offset_top = -15.0
+offset_right = 80.0
+offset_bottom = 12.0
+text = "Throw Lance"
+label_settings = ExtResource("1_fsi7x")
+vertical_alignment = 1

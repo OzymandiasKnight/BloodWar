@@ -1,19 +1,75 @@
-[gd_scene load_steps=15 format=3 uid="uid://ct70ef08rhvwj"]
+[gd_scene load_steps=32 format=3 uid="uid://ct70ef08rhvwj"]
 
-[ext_resource type="Script" path="res://addons/platformer_system/StateMachine.gd" id="1_hgmuv"]
-[ext_resource type="Script" path="res://Codes/Instances/States/PlayerIdle.gd" id="2_aop1m"]
-[ext_resource type="Script" path="res://Codes/Instances/States/PlayerWalk.gd" id="3_w2167"]
-[ext_resource type="Script" path="res://Codes/Instances/States/PlayerTeleport.gd" id="4_01kqi"]
-[ext_resource type="Script" path="res://Codes/Instances/States/PlayerFall.gd" id="4_dqjvr"]
-[ext_resource type="Script" path="res://Codes/Instances/States/PlayerRun.gd" id="4_o6sfb"]
-[ext_resource type="Script" path="res://Codes/Instances/States/PlayerJump.gd" id="5_day2h"]
-[ext_resource type="Script" path="res://Codes/Instances/States/PlayerThrow.gd" id="7_l0aw0"]
-[ext_resource type="Script" path="res://Codes/Instances/States/PlayerAttackAnimation.gd" id="9_ow1gg"]
-[ext_resource type="Script" path="res://Codes/Instances/States/PlayerDeath.gd" id="9_xqoiq"]
-[ext_resource type="Script" path="res://Codes/Instances/States/PlayerSpawn.gd" id="11_paxdt"]
-[ext_resource type="Script" path="res://Codes/Instances/States/PlayerParry.gd" id="12_jgdx7"]
-[ext_resource type="Script" path="res://Codes/Instances/States/PlayerStun.gd" id="13_phc8o"]
-[ext_resource type="Script" path="res://Codes/Instances/States/PlayerEdge.gd" id="15_hb4gd"]
+[ext_resource type="Script" uid="uid://bbc1ysqc8ndm6" path="res://addons/platformer_system/StateMachine.gd" id="1_hgmuv"]
+[ext_resource type="Script" uid="uid://dv042egi5l5cc" path="res://Codes/Instances/States/PlayerIdle.gd" id="2_aop1m"]
+[ext_resource type="Texture2D" uid="uid://babypq53ayxqm" path="res://Textures/Instances/Interfaces/UserIcons.png" id="3_tr3xr"]
+[ext_resource type="Script" uid="uid://l6itkt5y467r" path="res://Codes/Instances/States/PlayerWalk.gd" id="3_w2167"]
+[ext_resource type="Script" uid="uid://c4lyhxfs7txh1" path="res://Codes/Instances/States/PlayerTeleport.gd" id="4_01kqi"]
+[ext_resource type="Script" uid="uid://bifrggnphw5ds" path="res://Ressources/Uniques/Classes/InputIcon.gd" id="4_3comg"]
+[ext_resource type="Script" uid="uid://lh1odtqqjxcl" path="res://Codes/Instances/States/PlayerFall.gd" id="4_dqjvr"]
+[ext_resource type="Script" uid="uid://db8y1ksvvugoj" path="res://Codes/Instances/States/PlayerRun.gd" id="4_o6sfb"]
+[ext_resource type="Script" uid="uid://ds5lbiyhfkijk" path="res://Codes/Instances/States/PlayerJump.gd" id="5_day2h"]
+[ext_resource type="Texture2D" uid="uid://c1ycwjh8aro7o" path="res://Textures/Instances/Interfaces/Icons/L2.tres" id="6_ru005"]
+[ext_resource type="Texture2D" uid="uid://nejla86gdww3" path="res://Textures/Instances/Interfaces/Icons/R2Pressed.tres" id="7_i551g"]
+[ext_resource type="Script" uid="uid://nkv6f7que0fs" path="res://Codes/Instances/States/PlayerThrow.gd" id="7_l0aw0"]
+[ext_resource type="Script" uid="uid://bth2t7gehogy5" path="res://Codes/Instances/States/PlayerAttackAnimation.gd" id="9_ow1gg"]
+[ext_resource type="Script" uid="uid://c71uskw21ygfr" path="res://Codes/Instances/States/PlayerDeath.gd" id="9_xqoiq"]
+[ext_resource type="Script" uid="uid://c1tnbcynukhf5" path="res://Codes/Instances/States/PlayerSpawn.gd" id="11_paxdt"]
+[ext_resource type="Script" uid="uid://ded1pai6u4ybj" path="res://Codes/Instances/States/PlayerParry.gd" id="12_jgdx7"]
+[ext_resource type="Script" uid="uid://dsggg3n7sjyh4" path="res://Codes/Instances/States/PlayerStun.gd" id="13_phc8o"]
+[ext_resource type="Script" uid="uid://4t16o3ooj8s7" path="res://Codes/Instances/States/PlayerEdge.gd" id="15_hb4gd"]
+[ext_resource type="Texture2D" uid="uid://rja42fyyp8jx" path="res://Textures/Instances/Interfaces/Icons/DownButton.tres" id="19_kce57"]
+[ext_resource type="Script" uid="uid://c77cdymd8k5ic" path="res://Codes/Instances/States/PlayerBatHit.gd" id="20_4rqn4"]
+[ext_resource type="Script" uid="uid://dksitj52ke2au" path="res://Codes/Instances/States/PlayerHammerDive.gd" id="20_7gqlv"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dq3v2"]
+atlas = ExtResource("3_tr3xr")
+region = Rect2(27, 27, 27, 27)
+
+[sub_resource type="Resource" id="Resource_1qcyg"]
+script = ExtResource("4_3comg")
+name = "Parry"
+icons = Array[Texture2D]([SubResource("AtlasTexture_dq3v2")])
+
+[sub_resource type="Resource" id="Resource_i0kad"]
+script = ExtResource("4_3comg")
+name = "Kick"
+icons = Array[Texture2D]([ExtResource("6_ru005")])
+
+[sub_resource type="Resource" id="Resource_vphjo"]
+script = ExtResource("4_3comg")
+name = "Throw Lance"
+icons = Array[Texture2D]([ExtResource("6_ru005"), ExtResource("7_i551g")])
+
+[sub_resource type="Resource" id="Resource_qy3eh"]
+script = ExtResource("4_3comg")
+name = "Punch"
+icons = Array[Texture2D]([ExtResource("6_ru005")])
+
+[sub_resource type="Resource" id="Resource_d7mai"]
+script = ExtResource("4_3comg")
+name = "Slash"
+icons = Array[Texture2D]([ExtResource("6_ru005"), ExtResource("7_i551g")])
+
+[sub_resource type="Resource" id="Resource_s6q70"]
+script = ExtResource("4_3comg")
+name = "Punch"
+icons = Array[Texture2D]([ExtResource("6_ru005")])
+
+[sub_resource type="Resource" id="Resource_k4kj0"]
+script = ExtResource("4_3comg")
+name = "Teleport"
+icons = Array[Texture2D]([ExtResource("6_ru005"), ExtResource("7_i551g")])
+
+[sub_resource type="Resource" id="Resource_x3nwq"]
+script = ExtResource("4_3comg")
+name = "Jump"
+icons = Array[Texture2D]([ExtResource("19_kce57")])
+
+[sub_resource type="Resource" id="Resource_jyb4v"]
+script = ExtResource("4_3comg")
+name = "Bat Jump"
+icons = Array[Texture2D]([ExtResource("6_ru005"), ExtResource("7_i551g")])
 
 [node name="StateMachine" type="Node" node_paths=PackedStringArray("default_state")]
 script = ExtResource("1_hgmuv")
@@ -23,32 +79,34 @@ default_state = NodePath("Idle")
 script = ExtResource("2_aop1m")
 can_fall = true
 can_jump = true
-entry_animation = "Idle"
+possible_inputs = Array[ExtResource("4_3comg")]([SubResource("Resource_1qcyg")])
 
 [node name="Walk" type="Node" parent="."]
 script = ExtResource("3_w2167")
-walk_speed = 50
-use_cost = 20
+use_cost = 25
 can_fall = true
 can_jump = true
+entry_animation = "Walk"
+possible_inputs = Array[ExtResource("4_3comg")]([SubResource("Resource_i0kad"), SubResource("Resource_vphjo")])
 
 [node name="Run" type="Node" parent="."]
 script = ExtResource("4_o6sfb")
-speed = 175
 use_cost = 35
 can_fall = true
 can_jump = true
 entry_animation = "Run"
+possible_inputs = Array[ExtResource("4_3comg")]([SubResource("Resource_qy3eh"), SubResource("Resource_d7mai")])
 
 [node name="Fall" type="Node" parent="."]
 script = ExtResource("4_dqjvr")
 use_cost = 5
 grace_time = 0.2
 entry_animation = "Fall"
+possible_inputs = Array[ExtResource("4_3comg")]([SubResource("Resource_s6q70"), SubResource("Resource_k4kj0")])
 
 [node name="Teleport" type="Node" parent="."]
 script = ExtResource("4_01kqi")
-teleport_distance = 125.0
+teleport_distance = 725.0
 activation_time = 0.25
 entry_animation = "Teleport"
 
@@ -65,15 +123,14 @@ entry_animation = "Throw"
 [node name="StraightPunch" type="Node" parent="."]
 script = ExtResource("9_ow1gg")
 duration = 0.4
-slow_speed = true
+deceleration_time = 0.4
 gravity = true
 entry_animation = "StraightPunch"
 
 [node name="DashSlash" type="Node" parent="."]
 script = ExtResource("9_ow1gg")
 duration = 1.1
-raw_stop = true
-slow_speed = true
+deceleration_time = 0.6
 gravity = true
 entry_animation = "DashSlash"
 
@@ -86,6 +143,7 @@ entry_animation = "DownPunch"
 
 [node name="Death" type="Node" parent="."]
 script = ExtResource("9_xqoiq")
+entry_animation = "Death"
 
 [node name="Spawn" type="Node" parent="."]
 script = ExtResource("11_paxdt")
@@ -105,11 +163,21 @@ entry_animation = "Stun"
 [node name="Edge" type="Node" parent="."]
 script = ExtResource("15_hb4gd")
 offset = Vector2(16, 27)
-entry_animation = "Edge"
+possible_inputs = Array[ExtResource("4_3comg")]([SubResource("Resource_x3nwq"), SubResource("Resource_jyb4v")])
+
+[node name="BatHit" type="Node" parent="."]
+script = ExtResource("20_4rqn4")
+hit_time = 0.6
+entry_animation = "BatHit"
+possible_inputs = Array[ExtResource("4_3comg")]([SubResource("Resource_x3nwq")])
 
 [node name="WalkKick" type="Node" parent="."]
 script = ExtResource("9_ow1gg")
 duration = 0.6
-slow_speed = true
+deceleration_time = 0.3
 gravity = true
 entry_animation = "WalkKick"
+
+[node name="HammerDive" type="Node" parent="."]
+script = ExtResource("20_7gqlv")
+teleporting_time = 0.35
